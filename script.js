@@ -43,6 +43,7 @@ const translations = {
     cmd_aliases: 'Известные позывные: Gander18, primagander18, gander, primagander228, gander18sus и др.',
     cmd_bgm: `🎵 BGM_STREAM: <a href="${SPOTIFY_URL}" target="_blank" rel="noopener" style="color: var(--red-main); text-decoration: underline;">Открыть плейлист в Spotify ↗</a>`,
     cmd_heart: '⚡ CALLING CARD SENT: Похищаем ваш FPS и возвращаем в двойном объёме.',
+    cmd_layout: '⚠️ Эй, гений, раскладку на английскую переключи! Терминал понимает только латиницу.',
     cmd_unknown: 'Команда "{cmd}" не найдена. Введи <b>help</b>.'
   },
   en: {
@@ -86,6 +87,7 @@ const translations = {
     cmd_aliases: 'Known aliases: Gander18, primagander18, gander, primagander228, gander18sus, etc.',
     cmd_bgm: `🎵 BGM_STREAM: <a href="${SPOTIFY_URL}" target="_blank" rel="noopener" style="color: var(--red-main); text-decoration: underline;">Open Spotify Playlist ↗</a>`,
     cmd_heart: '⚡ CALLING CARD SENT: Stealing your FPS and returning it doubled.',
+    cmd_layout: '⚠️ Genius, switch your keyboard layout to English! This terminal only reads Latin characters.',
     cmd_unknown: 'Command "{cmd}" not found. Type <b>help</b>.'
   }
 };
@@ -153,17 +155,25 @@ const cliOutput = document.getElementById('cli-output');
 if (cliInput && cliOutput) {
   cliInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
-      const cmd = cliInput.value.trim().toLowerCase();
+      const rawCmd = cliInput.value.trim();
+      const cmd = rawCmd.toLowerCase();
       cliInput.value = '';
 
       if (!cmd) return;
+
+      const dict = translations[currentLang];
+
+      // Пасхалка: проверка на любые не-английские буквы (кириллица, иероглифы и т.д.)
+      if (/[^\u0000-\u007F]/.test(rawCmd)) {
+        cliOutput.innerHTML = `<span style="color: var(--red-main)">&gt;</span> ${dict.cmd_layout}`;
+        return;
+      }
 
       if (cmd === 'clear') {
         cliOutput.textContent = '';
         return;
       }
 
-      const dict = translations[currentLang];
       const commandMap = {
         'help': dict.cmd_help,
         'status': dict.cmd_status,
@@ -176,7 +186,7 @@ if (cliInput && cliOutput) {
       if (commandMap[cmd]) {
         cliOutput.innerHTML = `<span style="color: var(--red-main)">&gt;</span> ${commandMap[cmd]}`;
       } else {
-        const errText = dict.cmd_unknown.replace('{cmd}', cmd);
+        const errText = dict.cmd_unknown.replace('{cmd}', rawCmd);
         cliOutput.innerHTML = `<span style="color: var(--red-main)">&gt;</span> ${errText}`;
       }
     }
@@ -210,7 +220,6 @@ async function loadBF1Stats() {
     if (data.rank !== undefined) {
       const baseRank = `RANK ${data.rank}`;
       const rawName = data.rankName ? data.rankName.trim() : '';
-      // Исключаем дубль вида "RANK 67 // RANK 67"
       const rankSuffix = (rawName && rawName.toUpperCase() !== baseRank)
         ? ` // ${rawName.toUpperCase()}`
         : '';

@@ -56,7 +56,7 @@ body {
   padding: 0 20px;
 }
 
-/* ================= ДЕСКТОП ВЕРСИЯ (> 780px) ================= */
+/* ================= ДЕСКТОП ВЕРСИЯ (> 900px) ================= */
 
 /* Шапка */
 .header {
@@ -966,8 +966,7 @@ body {
   font-weight: bold;
 }
 
-/* ================= МИНИ-ВЕРСИЯ ДЛЯ ТЕЛЕФОНОВ (<= 780px) ================= */
-/* Сверхкомпактные виджеты-блоки без пустого воздуха */
+/* ================= МИНИ-ВЕРСИЯ ДЛЯ ТЕЛЕФОНОВ ================= */
 @media (max-width: 900px), (hover: none) and (pointer: coarse) {
   html {
     font-size: 11px;
@@ -985,7 +984,7 @@ body {
 
   .header-inner {
     padding: 6px 8px;
-    gap: 6px;
+    gap: 8px;
   }
 
   .logo {
@@ -1001,13 +1000,15 @@ body {
   .header-controls {
     width: 100%;
     justify-content: space-between;
-    gap: 6px;
+    gap: 8px;
   }
 
+  /* Чётко разделённые кнопки навигации без слипания */
   .nav {
     overflow-x: auto;
     flex-wrap: nowrap;
-    gap: 4px;
+    gap: 8px;
+    padding: 2px 0;
     scrollbar-width: none;
   }
 
@@ -1016,15 +1017,27 @@ body {
   }
 
   .nav a {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
     font-size: 0.9rem;
-    padding: 3px 6px;
+    padding: 4px 9px;
     background-color: var(--bg-panel);
     border: 1px solid var(--border-red);
+    border-left: 2px solid var(--red-main);
+    color: var(--white);
+  }
+
+  .nav a::before {
+    content: attr(data-num);
+    color: var(--red-main);
+    padding-right: 5px;
+    border-right: 1px solid var(--border-red);
   }
 
   .lang-btn {
     font-size: 0.9rem;
-    padding: 3px 7px;
+    padding: 4px 8px;
     clip-path: none;
   }
 
@@ -1106,7 +1119,7 @@ body {
   }
 
   .aka-tags {
-    gap: 4px;
+    gap: 5px;
   }
 
   .aka-pill {
@@ -1164,7 +1177,7 @@ body {
     padding-top: 4px;
   }
 
-  /* 2. Навыки — мини-карточки в 1 плотную стопку */
+  /* 2. Навыки — мини-карточки */
   .grid-3 {
     grid-template-columns: 1fr;
     gap: 8px;
@@ -1218,7 +1231,7 @@ body {
     clip-path: none;
   }
 
-  /* 3. BF1 — мини-информер 3x2 */
+  /* 3. BF1 — мини-информер */
   .bf1-terminal {
     padding: 10px;
     border-width: 1px;
@@ -1273,7 +1286,7 @@ body {
     gap: 8px;
   }
 
-  /* 4. Витрина проекта — узкий блок */
+  /* 4. Витрина проекта */
   .archive-showcase {
     grid-template-columns: 1fr auto;
     border-width: 1px;
@@ -1303,7 +1316,7 @@ body {
     clip-path: none;
   }
 
-  /* 5. Roadmap — компактный список */
+  /* 5. Roadmap */
   .timeline {
     padding-left: 12px;
     gap: 6px;
@@ -1329,7 +1342,7 @@ body {
     font-size: 1.1rem;
   }
 
-  /* 6. Контакты — мелкие плитки 2 в ряд */
+  /* 6. Контакты */
   .contacts-grid {
     grid-template-columns: 1fr 1fr;
     gap: 6px;
