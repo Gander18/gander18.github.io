@@ -1,7 +1,12 @@
 const SPOTIFY_URL = 'https://open.spotify.com/playlist/6IWrQPPMRPdiVHdEldgzyk?si=895dd11543534ada';
 const LPB_REPO_URL = 'https://github.com/Gander18/Lite-Pixel-Blood';
 
-// 1. Словарь переводов RU / EN
+document.querySelectorAll('.highlight-cut').forEach(el => {
+  if (!el.getAttribute('data-text')) {
+    el.setAttribute('data-text', el.textContent.trim());
+  }
+});
+
 const translations = {
   ru: {
     nav_about: 'КТО_Я',
@@ -38,15 +43,20 @@ const translations = {
     plan_4_desc: 'Докрутить интерфейс, подключить рабочие ссылки на проекты и расширить функционал.',
     sec_contacts: 'КАНАЛЫ СВЯЗИ',
     contacts_desc: '&gt; Выбери узел для прямого подключения или скопируй тег в буфер обмена:',
+    footer_note: 'ЛИЧНЫЙ ТЕРМИНАЛ // GANDER18',
     cmd_help: 'Доступные команды: status, stack, bgm, repo, aliases, clear, take your heart',
     cmd_status: '[OK] Система стабильна. Физика крови переведена в 0% PhysX mode.',
     cmd_stack: 'Языки: C#, C++, Lua | Софт: Godot Engine, Blender, Visual Studio.',
     cmd_aliases: 'Известные позывные: Gander18, primagander18, gander, primagander228, gander18sus и др.',
-    cmd_repo: `📦 REPO: <a href="${LPB_REPO_URL}" target="_blank" rel="noopener" style="color: var(--red-main); text-decoration: underline;">GitHub / Lite-Pixel-Blood ↗</a>`,
-    cmd_bgm: `🎵 BGM_STREAM: <a href="${SPOTIFY_URL}" target="_blank" rel="noopener" style="color: var(--red-main); text-decoration: underline;">Открыть плейлист в Spotify ↗</a>`,
+    cmd_repo: `📦 REPO: <a href="${LPB_REPO_URL}" target="_blank" rel="noopener" style="color: var(--red-accent-text); text-decoration: underline;">GitHub / Lite-Pixel-Blood ↗</a>`,
+    cmd_bgm: `🎵 BGM_STREAM: <a href="${SPOTIFY_URL}" target="_blank" rel="noopener" style="color: var(--red-accent-text); text-decoration: underline;">Открыть плейлист в Spotify ↗</a>`,
     cmd_heart: '⚡ CALLING CARD SENT: Похищаем ваш FPS и возвращаем в двойном объёме.',
     cmd_layout: '⚠️ Эй, гений, раскладку на английскую переключи! Терминал понимает только латиницу.',
-    cmd_unknown: 'Команда "{cmd}" не найдена. Введи <b>help</b>.'
+    cmd_unknown: 'Команда "{cmd}" не найдена. Введи <b>help</b>.',
+    copied_ok: 'СКОПИРОВАНО!',
+    copied_err: 'ОШИБКА КОПИРОВАНИЯ',
+    bf1_no_data: 'N/A',
+    bf1_sync_err: '[SYNC ERROR]'
   },
   en: {
     nav_about: 'WHO_AM_I',
@@ -83,19 +93,25 @@ const translations = {
     plan_4_desc: 'Polishing the UI, linking active projects, and expanding terminal features.',
     sec_contacts: 'COMMS CHANNELS',
     contacts_desc: '&gt; Select a node for direct connection or click to copy tag to clipboard:',
+    footer_note: 'PERSONAL TERMINAL // GANDER18',
     cmd_help: 'Available commands: status, stack, bgm, repo, aliases, clear, take your heart',
     cmd_status: '[OK] System nominal. Blood physics switched to 0% PhysX mode.',
     cmd_stack: 'Languages: C#, C++, Lua | Tools: Godot Engine, Blender, Visual Studio.',
     cmd_aliases: 'Known aliases: Gander18, primagander18, gander, primagander228, gander18sus, etc.',
-    cmd_repo: `📦 REPO: <a href="${LPB_REPO_URL}" target="_blank" rel="noopener" style="color: var(--red-main); text-decoration: underline;">GitHub / Lite-Pixel-Blood ↗</a>`,
-    cmd_bgm: `🎵 BGM_STREAM: <a href="${SPOTIFY_URL}" target="_blank" rel="noopener" style="color: var(--red-main); text-decoration: underline;">Open Spotify Playlist ↗</a>`,
+    cmd_repo: `📦 REPO: <a href="${LPB_REPO_URL}" target="_blank" rel="noopener" style="color: var(--red-accent-text); text-decoration: underline;">GitHub / Lite-Pixel-Blood ↗</a>`,
+    cmd_bgm: `🎵 BGM_STREAM: <a href="${SPOTIFY_URL}" target="_blank" rel="noopener" style="color: var(--red-accent-text); text-decoration: underline;">Open Spotify Playlist ↗</a>`,
     cmd_heart: '⚡ CALLING CARD SENT: Stealing your FPS and returning it doubled.',
     cmd_layout: '⚠️ Genius, switch your keyboard layout to English! This terminal only reads Latin characters.',
-    cmd_unknown: 'Command "{cmd}" not found. Type <b>help</b>.'
+    cmd_unknown: 'Command "{cmd}" not found. Type <b>help</b>.',
+    copied_ok: 'COPIED!',
+    copied_err: 'COPY FAILED',
+    bf1_no_data: 'N/A',
+    bf1_sync_err: '[SYNC ERROR]'
   }
 };
 
 let currentLang = localStorage.getItem('gander18_lang') || 'ru';
+const i18nElements = Array.from(document.querySelectorAll('[data-i18n]'));
 
 function applyLanguage(lang) {
   currentLang = lang;
@@ -108,12 +124,14 @@ function applyLanguage(lang) {
   }
 
   const dict = translations[lang];
-  document.querySelectorAll('[data-i18n]').forEach(el => {
+  for (let i = 0; i < i18nElements.length; i++) {
+    const el = i18nElements[i];
     const key = el.getAttribute('data-i18n');
-    if (dict[key]) {
-      el.innerHTML = dict[key];
+    const nextHtml = dict[key];
+    if (nextHtml !== undefined && el.innerHTML !== nextHtml) {
+      el.innerHTML = nextHtml;
     }
-  });
+  }
 
   const cliInput = document.getElementById('cli-input');
   if (cliInput) {
@@ -130,7 +148,6 @@ if (langToggleBtn) {
   });
 }
 
-// 2. Надёжное копирование в буфер обмена
 function copyToClipboard(text) {
   if (navigator.clipboard && window.isSecureContext) {
     return navigator.clipboard.writeText(text);
@@ -144,8 +161,9 @@ function copyToClipboard(text) {
     textArea.focus();
     textArea.select();
     try {
-      document.execCommand('copy');
-      resolve();
+      const ok = document.execCommand('copy');
+      if (ok) resolve();
+      else reject(new Error('execCommand returned false'));
     } catch (err) {
       reject(err);
     } finally {
@@ -159,22 +177,29 @@ document.querySelectorAll('.copy-btn').forEach(btn => {
     const textToCopy = btn.getAttribute('data-copy');
     const valSpan = btn.querySelector('.c-val');
     const originalText = valSpan.textContent;
+    const dict = translations[currentLang];
 
-    copyToClipboard(textToCopy).then(() => {
-      valSpan.textContent = currentLang === 'ru' ? 'СКОПИРОВАНО!' : 'COPIED!';
-      btn.style.backgroundColor = 'var(--white)';
-      btn.style.color = 'var(--bg-dark)';
-
-      setTimeout(() => {
-        valSpan.textContent = originalText;
-        btn.style.backgroundColor = '';
-        btn.style.color = '';
-      }, 1500);
-    });
+    copyToClipboard(textToCopy)
+      .then(() => {
+        valSpan.textContent = dict.copied_ok;
+        btn.style.backgroundColor = 'var(--white)';
+        btn.style.color = 'var(--bg-dark)';
+      })
+      .catch(() => {
+        valSpan.textContent = dict.copied_err;
+        btn.style.backgroundColor = 'var(--red-main)';
+        btn.style.color = 'var(--white)';
+      })
+      .finally(() => {
+        setTimeout(() => {
+          valSpan.textContent = originalText;
+          btn.style.backgroundColor = '';
+          btn.style.color = '';
+        }, 1500);
+      });
   });
 });
 
-// 3. Интерактивный терминал
 const cliForm = document.getElementById('cli-form');
 const cliInput = document.getElementById('cli-input');
 const cliOutput = document.getElementById('cli-output');
@@ -182,16 +207,15 @@ const cliOutput = document.getElementById('cli-output');
 if (cliForm && cliInput && cliOutput) {
   cliForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    const rawCmd = cliInput.value.trim();
-    const cmd = rawCmd.toLowerCase();
+    const cmd = cliInput.value.replace(/\s+/g, ' ').trim().toLowerCase();
     cliInput.value = '';
 
     if (!cmd) return;
 
     const dict = translations[currentLang];
 
-    if (/[^\u0000-\u007F]/.test(rawCmd)) {
-      cliOutput.innerHTML = `<span style="color: var(--red-main)">&gt;</span> ${dict.cmd_layout}`;
+    if (/[^\u0000-\u007F]/.test(cmd)) {
+      cliOutput.innerHTML = `<span style="color: var(--red-accent-text)">&gt;</span> ${dict.cmd_layout}`;
       return;
     }
 
@@ -211,15 +235,14 @@ if (cliForm && cliInput && cliOutput) {
     };
 
     if (commandMap[cmd]) {
-      cliOutput.innerHTML = `<span style="color: var(--red-main)">&gt;</span> ${commandMap[cmd]}`;
+      cliOutput.innerHTML = `<span style="color: var(--red-accent-text)">&gt;</span> ${commandMap[cmd]}`;
     } else {
-      const errText = dict.cmd_unknown.replace('{cmd}', rawCmd);
-      cliOutput.innerHTML = `<span style="color: var(--red-main)">&gt;</span> ${errText}`;
+      const errText = dict.cmd_unknown.replace('{cmd}', cmd);
+      cliOutput.innerHTML = `<span style="color: var(--red-accent-text)">&gt;</span> ${errText}`;
     }
   });
 }
 
-// 4. Живой таймер сессии в правом мониторе Hero
 const sessionTimerEl = document.getElementById('session-timer');
 if (sessionTimerEl) {
   let seconds = 0;
@@ -232,8 +255,9 @@ if (sessionTimerEl) {
   }, 1000);
 }
 
-// 5. Автообновление статистики Battlefield 1 с кэшем (15 мин) и таймаутом (5 сек)
-function renderBF1Data(data, statusLabel, isLive) {
+function renderBF1Data(data, statusLabel, state) {
+  const locale = currentLang === 'ru' ? 'ru-RU' : 'en-US';
+
   if (data.rank !== undefined) {
     const baseRank = `RANK ${data.rank}`;
     const rawName = data.rankName ? data.rankName.trim() : '';
@@ -249,10 +273,12 @@ function renderBF1Data(data, statusLabel, isLive) {
     document.getElementById('bf1-win').textContent = data.winPercent;
   }
   if (data.scorePerMinute !== undefined) {
-    document.getElementById('bf1-spm').textContent = data.scorePerMinute;
+    document.getElementById('bf1-spm').textContent = Number(data.scorePerMinute).toLocaleString(locale, {
+      maximumFractionDigits: 2
+    });
   }
   if (data.kills !== undefined) {
-    document.getElementById('bf1-kills').textContent = Number(data.kills).toLocaleString('en-US');
+    document.getElementById('bf1-kills').textContent = Number(data.kills).toLocaleString(locale);
   }
   if (data.secondsPlayed !== undefined) {
     const hours = Math.floor(data.secondsPlayed / 3600);
@@ -264,39 +290,64 @@ function renderBF1Data(data, statusLabel, isLive) {
   if (Array.isArray(data.weapons) && data.weapons.length > 0) {
     const topWeapon = [...data.weapons].sort((a, b) => b.kills - a.kills)[0];
     if (topWeapon && topWeapon.weaponName) {
-      document.getElementById('bf1-weapon').textContent = `${topWeapon.weaponName} (${topWeapon.kills} kills)`;
+      document.getElementById('bf1-weapon').textContent = `${topWeapon.weaponName} (${Number(topWeapon.kills).toLocaleString(locale)} kills)`;
     }
   }
 
   const syncEl = document.getElementById('bf1-sync');
   if (syncEl) {
     syncEl.textContent = statusLabel;
-    syncEl.classList.toggle('live', isLive);
+    syncEl.classList.toggle('live', state === 'live');
+    syncEl.classList.toggle('error', state === 'error');
+  }
+}
+
+function renderBF1Unavailable() {
+  const dict = translations[currentLang];
+  const na = dict.bf1_no_data;
+
+  document.getElementById('bf1-rank').textContent = na;
+  document.getElementById('bf1-kd').textContent = na;
+  document.getElementById('bf1-win').textContent = na;
+  document.getElementById('bf1-spm').textContent = na;
+  document.getElementById('bf1-kills').textContent = na;
+  document.getElementById('bf1-time').textContent = na;
+  document.getElementById('bf1-class').textContent = na;
+  document.getElementById('bf1-weapon').textContent = na;
+
+  const syncEl = document.getElementById('bf1-sync');
+  if (syncEl) {
+    syncEl.textContent = dict.bf1_sync_err;
+    syncEl.classList.remove('live');
+    syncEl.classList.add('error');
   }
 }
 
 async function loadBF1Stats() {
-  const syncEl = document.getElementById('bf1-sync');
   const apiLang = currentLang === 'ru' ? 'ru-ru' : 'en-us';
   const cacheKey = `gander18_bf1_${apiLang}`;
-  const CACHE_TTL = 15 * 60 * 1000; // 15 минут между запросами к API
-  const FETCH_TIMEOUT = 5000;       // 5 секунд таймаут ожидания ответа
+  const CACHE_TTL = 15 * 60 * 1000;
+  const FETCH_TIMEOUT = 5000;
 
-  // 1. Проверяем свежий кэш в localStorage, чтобы не спамить API при F5 и смене языка
   try {
     const cachedRaw = localStorage.getItem(cacheKey);
     if (cachedRaw) {
       const cached = JSON.parse(cachedRaw);
-      if (Date.now() - cached.timestamp < CACHE_TTL && cached.data) {
-        renderBF1Data(cached.data, '[LIVE API]', true);
-        return;
+      if (cached && cached.data && typeof cached.timestamp === 'number') {
+        if (Date.now() - cached.timestamp < CACHE_TTL) {
+          renderBF1Data(cached.data, '[LIVE API]', 'live');
+          return;
+        }
+        // Удаляем протухшую запись, чтобы не копился старый кэш
+        localStorage.removeItem(cacheKey);
+      } else {
+        localStorage.removeItem(cacheKey);
       }
     }
   } catch (e) {
-    // Игнорируем ошибки парсинга localStorage
+    try { localStorage.removeItem(cacheKey); } catch (_) {}
   }
 
-  // 2. Если кэш устарел — делаем запрос с жёстким таймаутом
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT);
   const apiUrl = `https://api.gametools.network/bf1/stats/?name=PrimaGander18&platform=pc&lang=${apiLang}`;
@@ -313,14 +364,10 @@ async function loadBF1Stats() {
       data: data
     }));
 
-    renderBF1Data(data, '[LIVE API]', true);
+    renderBF1Data(data, '[LIVE API]', 'live');
   } catch (err) {
     clearTimeout(timeoutId);
-    if (syncEl) {
-      syncEl.textContent = '[CACHED]';
-      syncEl.classList.remove('live');
-    }
-    console.warn('BF1 API таймаут или лимит, показан кэш:', err);
+    renderBF1Unavailable();
   }
 }
 

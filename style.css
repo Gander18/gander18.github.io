@@ -3,10 +3,12 @@
   --bg-panel: #140609;
   --bg-panel-hover: #1f090e;
   --red-main: #e6002b;
-  --red-glow: rgba(230, 0, 43, 0.35);
+  --red-bright: #ff335a;
+  --red-accent-text: #ff5c7a;
+  --red-glow: rgba(230, 0, 43, 0.3);
   --white: #f5f5f7;
-  --gray: #9a8c91;
-  --border-red: #52101d;
+  --gray: #b5a7ad;
+  --border-red: #5c1220;
 }
 
 * {
@@ -23,7 +25,7 @@ html {
 
 body {
   background-color: var(--bg-dark);
-  background-image: 
+  background-image:
     radial-gradient(circle at 85% 15%, rgba(230, 0, 43, 0.14), transparent 40%),
     linear-gradient(rgba(230, 0, 43, 0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(230, 0, 43, 0.03) 1px, transparent 1px);
@@ -36,17 +38,25 @@ body {
   overflow-x: hidden;
 }
 
-/* Безопасные сканлайны 2px без муара */
+/* Фокус с клавиатуры (A11y) */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid var(--white);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--red-main);
+}
+
 .crt-overlay {
   position: fixed;
   inset: 0;
   background: linear-gradient(
-    rgba(18, 16, 16, 0) 50%, 
-    rgba(0, 0, 0, 0.16) 50%
+    rgba(18, 16, 16, 0) 50%,
+    rgba(0, 0, 0, 0.14) 50%
   );
   background-size: 100% 2px;
   pointer-events: none;
-  z-index: 999;
+  z-index: 998;
 }
 
 .container {
@@ -56,16 +66,13 @@ body {
   padding: 0 20px;
 }
 
-/* ================= ДЕСКТОП ВЕРСИЯ (> 900px) ================= */
-
 /* Шапка */
 .header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background-color: rgba(9, 3, 5, 0.94);
+  background-color: rgba(9, 3, 5, 0.95);
   border-bottom: 2px solid var(--red-main);
-  backdrop-filter: blur(8px);
 }
 
 .header-inner {
@@ -86,8 +93,8 @@ body {
 .sys-dot {
   width: 10px;
   height: 10px;
-  background-color: var(--red-main);
-  box-shadow: 0 0 10px var(--red-main);
+  background-color: var(--red-bright);
+  box-shadow: 0 0 8px var(--red-main);
   transform: rotate(45deg);
 }
 
@@ -101,7 +108,7 @@ body {
 }
 
 .cursor {
-  color: var(--red-main);
+  color: var(--red-accent-text);
   animation: blink 1s step-end infinite;
 }
 
@@ -127,12 +134,12 @@ body {
   text-decoration: none;
   padding: 4px 8px;
   white-space: nowrap;
-  transition: all 0.15s;
+  transition: background-color 0.15s, color 0.15s, transform 0.15s;
 }
 
 .nav a::before {
   content: attr(data-num) " ";
-  color: var(--red-main);
+  color: var(--red-accent-text);
   font-weight: bold;
 }
 
@@ -143,7 +150,7 @@ body {
 }
 
 .nav a:hover::before {
-  color: var(--bg-dark);
+  color: var(--white);
 }
 
 .lang-btn {
@@ -156,18 +163,18 @@ body {
   padding: 5px 10px;
   cursor: pointer;
   clip-path: polygon(8% 0, 100% 0, 92% 100%, 0% 100%);
-  transition: all 0.15s;
+  transition: background-color 0.15s, color 0.15s, transform 0.15s;
   white-space: nowrap;
   flex-shrink: 0;
 }
 
 .lang-btn:hover {
-  background-color: var(--red-main);
+  background-color: var(--red-bright);
   color: var(--white);
   transform: scale(1.05);
 }
 
-/* Общие стили секций */
+/* Секции */
 .section {
   padding: 64px 0;
   border-bottom: 1px solid var(--border-red);
@@ -187,7 +194,7 @@ body {
 
 .sec-num {
   font-family: 'JetBrains Mono', monospace;
-  color: var(--red-main);
+  color: var(--red-accent-text);
   font-weight: 800;
   font-size: 1.2rem;
 }
@@ -195,7 +202,7 @@ body {
 .section-title {
   font-size: 1.75rem;
   font-weight: 800;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
   background-color: var(--white);
   color: var(--bg-dark);
@@ -210,7 +217,7 @@ body {
   margin-bottom: 20px;
 }
 
-/* 1. Асимметричный Hero */
+/* 1. Hero */
 .hero {
   padding-top: 40px;
 }
@@ -222,7 +229,7 @@ body {
   gap: 8px;
   flex-wrap: wrap;
   background-color: var(--red-main);
-  color: var(--bg-dark);
+  color: var(--white);
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.8rem;
   font-weight: 800;
@@ -260,7 +267,7 @@ body {
 
 .alias-tag {
   font-family: 'JetBrains Mono', monospace;
-  color: var(--red-main);
+  color: var(--red-accent-text);
   font-size: 0.85rem;
   font-weight: 700;
   margin-bottom: 12px;
@@ -271,17 +278,56 @@ body {
   font-size: 2.7rem;
   line-height: 1.15;
   margin-bottom: 20px;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
 }
 
 .highlight-cut {
+  position: relative;
   background-color: var(--red-main);
   color: var(--white);
-  padding: 2px 14px;
+  padding: 2px 16px;
   display: inline-block;
   margin-top: 6px;
+  letter-spacing: 3px;
   transform: rotate(-1.5deg);
   box-shadow: 4px 4px 0px var(--white);
+  transition: transform 0.15s, background-color 0.15s;
+}
+
+.highlight-cut::before,
+.highlight-cut::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 2px;
+  left: 16px;
+  pointer-events: none;
+  opacity: 0.72;
+  transition: transform 0.15s;
+}
+
+.highlight-cut::before {
+  color: var(--white);
+  clip-path: inset(0 0 58% 0);
+  transform: translate(-3px, -1px);
+}
+
+.highlight-cut::after {
+  color: #140609;
+  clip-path: inset(55% 0 0 0);
+  transform: translate(3px, 1px);
+}
+
+.hero h1:hover .highlight-cut {
+  background-color: var(--red-bright);
+  transform: rotate(-1.5deg) skewX(-6deg);
+}
+
+.hero h1:hover .highlight-cut::before {
+  transform: translate(-6px, -1px);
+}
+
+.hero h1:hover .highlight-cut::after {
+  transform: translate(6px, 1px);
 }
 
 .lead {
@@ -291,7 +337,6 @@ body {
   margin-bottom: 18px;
 }
 
-/* Блок известных никнеймов */
 .aka-block {
   display: block;
   font-family: 'JetBrains Mono', monospace;
@@ -300,8 +345,8 @@ body {
 
 .aka-label {
   display: block;
-  font-size: 0.75rem;
-  color: var(--red-main);
+  font-size: 0.78rem;
+  color: var(--red-accent-text);
   font-weight: 800;
   margin-bottom: 8px;
   letter-spacing: 0.5px;
@@ -321,12 +366,13 @@ body {
   color: var(--white);
   padding: 3px 10px;
   clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 0 100%);
-  transition: border-color 0.15s, color 0.15s;
+  transition: border-color 0.15s, color 0.15s, background-color 0.15s;
 }
 
 .aka-pill:hover {
-  border-color: var(--red-main);
-  color: var(--red-main);
+  border-color: var(--white);
+  background-color: var(--red-main);
+  color: var(--white);
 }
 
 .aka-pill.muted {
@@ -351,12 +397,12 @@ body {
 }
 
 .cli-box:focus-within {
-  border-color: var(--red-main);
-  box-shadow: 0 0 12px var(--red-glow);
+  border-color: var(--red-bright);
+  box-shadow: 0 0 10px var(--red-glow);
 }
 
 .prompt {
-  color: var(--red-main);
+  color: var(--red-accent-text);
   font-weight: bold;
   white-space: nowrap;
   flex-shrink: 0;
@@ -408,7 +454,7 @@ body {
   word-break: break-word;
 }
 
-/* Правая колонка Hero: Системный монитор */
+/* Системный монитор */
 .sys-monitor {
   background-color: var(--bg-dark);
   border: 1px solid var(--border-red);
@@ -423,10 +469,11 @@ body {
 .mon-header {
   display: flex;
   justify-content: space-between;
-  font-size: 0.75rem;
+  font-size: 0.78rem;
   font-weight: 800;
-  color: var(--gray);
-  padding-bottom: 8px;
+  color: var(--white);
+  padding-bottom: 10px;
+  margin-bottom: 10px;
   border-bottom: 1px dashed var(--border-red);
 }
 
@@ -434,30 +481,19 @@ body {
   color: #00ff88;
 }
 
-.mon-radar {
-  padding: 10px 0;
-  display: flex;
-  justify-content: center;
-}
-
-.radar-svg {
-  width: 100%;
-  max-height: 85px;
-}
-
 .mon-rows {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  font-size: 0.78rem;
+  gap: 10px;
+  font-size: 0.8rem;
 }
 
 .mon-row {
   display: flex;
   justify-content: space-between;
   gap: 8px;
-  border-bottom: 1px solid rgba(82, 16, 29, 0.4);
-  padding-bottom: 4px;
+  border-bottom: 1px solid rgba(92, 18, 32, 0.5);
+  padding-bottom: 6px;
 }
 
 .m-key {
@@ -471,15 +507,15 @@ body {
 }
 
 .m-val.accent {
-  color: var(--red-main);
+  color: var(--red-accent-text);
 }
 
 .mon-footer {
   display: flex;
   justify-content: space-between;
-  font-size: 0.68rem;
-  color: var(--red-main);
-  margin-top: 12px;
+  font-size: 0.72rem;
+  color: var(--red-accent-text);
+  margin-top: 14px;
   padding-top: 8px;
   border-top: 1px dashed var(--border-red);
 }
@@ -498,12 +534,23 @@ body {
   border: 1px solid var(--border-red);
   border-top: 3px solid var(--red-main);
   padding: 24px;
-  transition: transform 0.2s, background-color 0.2s;
+  transition: transform 0.15s, background-color 0.15s, border-color 0.15s;
 }
 
 .skill-module:hover {
   background-color: var(--bg-panel-hover);
-  transform: translateY(-4px);
+  border-color: var(--red-bright);
+  border-top-color: var(--white);
+  transform: translateY(-3px);
+}
+
+.skill-module:hover .bg-index {
+  color: rgba(255, 51, 90, 0.22);
+}
+
+.skill-module:hover .module-glyph {
+  background-color: var(--white);
+  color: var(--bg-dark);
 }
 
 .bg-index {
@@ -516,16 +563,26 @@ body {
   color: rgba(230, 0, 43, 0.09);
   pointer-events: none;
   user-select: none;
+  transition: color 0.15s;
 }
 
-.module-icon {
-  color: var(--red-main);
-  margin-bottom: 12px;
+.module-glyph {
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--red-accent-text);
+  background-color: var(--bg-dark);
+  border: 1px solid var(--border-red);
+  padding: 2px 8px;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+  transition: background-color 0.15s, color 0.15s;
 }
 
 .module-tag {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   color: var(--gray);
   margin-bottom: 6px;
 }
@@ -541,7 +598,6 @@ body {
   color: var(--gray);
 }
 
-/* Карточка с плейлистом и анимация эквалайзера */
 .skill-bgm {
   display: flex;
   flex-direction: column;
@@ -563,13 +619,14 @@ body {
   text-decoration: none;
   padding: 10px 14px;
   clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
-  transition: all 0.15s;
+  transition: background-color 0.15s, border-color 0.15s, color 0.15s;
   position: relative;
   z-index: 2;
 }
 
 .bgm-btn:hover {
-  background-color: var(--red-main);
+  background-color: var(--red-bright);
+  border-color: var(--white);
   color: var(--white);
 }
 
@@ -583,8 +640,8 @@ body {
 
 .bgm-eq span {
   width: 3px;
-  background-color: var(--red-main);
-  animation: eq-bounce 0.8s ease-in-out infinite alternate;
+  background-color: var(--red-accent-text);
+  animation: eq-bounce 0.9s ease-in-out infinite alternate;
 }
 
 .bgm-btn:hover .bgm-eq span {
@@ -604,7 +661,7 @@ body {
   100% { height: 12px; }
 }
 
-/* 3. Блок Battlefield 1 */
+/* 3. BF1 */
 .bf1-terminal {
   background-color: var(--bg-panel);
   border: 2px solid var(--red-main);
@@ -631,8 +688,14 @@ body {
   flex-wrap: wrap;
 }
 
+.bf1-crosshair {
+  color: var(--red-accent-text);
+  font-weight: 800;
+  font-size: 0.9rem;
+}
+
 .card-id {
-  color: var(--red-main);
+  color: var(--red-accent-text);
   font-weight: bold;
   font-size: 0.8rem;
 }
@@ -649,6 +712,10 @@ body {
 
 .sync-status.live {
   color: #00ff88;
+}
+
+.sync-status.error {
+  color: var(--red-accent-text);
 }
 
 .badge-red {
@@ -693,8 +760,8 @@ body {
 
 .stat-sub {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.65rem;
-  color: var(--red-main);
+  font-size: 0.68rem;
+  color: var(--red-accent-text);
   letter-spacing: 0.5px;
 }
 
@@ -716,7 +783,7 @@ body {
 
 .stat-label {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   color: var(--gray);
 }
 
@@ -756,6 +823,22 @@ body {
   background-color: var(--bg-panel);
   border: 2px solid var(--white);
   box-shadow: 8px 8px 0px var(--red-main);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.archive-showcase:hover {
+  border-color: var(--red-bright);
+  box-shadow: 8px 8px 0px var(--white);
+}
+
+.archive-showcase:hover .archive-metric {
+  background-color: var(--white);
+  color: var(--bg-dark);
+}
+
+.archive-showcase:hover .archive-metric .metric-sub {
+  background-color: var(--red-main);
+  color: var(--white);
 }
 
 .archive-main {
@@ -802,6 +885,7 @@ body {
   align-items: center;
   text-align: center;
   font-family: 'JetBrains Mono', monospace;
+  transition: background-color 0.15s, color 0.15s;
 }
 
 .metric-number {
@@ -822,6 +906,7 @@ body {
   background-color: var(--bg-dark);
   padding: 2px 8px;
   margin-top: 10px;
+  transition: background-color 0.15s, color 0.15s;
 }
 
 .p5-btn {
@@ -835,11 +920,11 @@ body {
   text-decoration: none;
   padding: 10px 18px;
   clip-path: polygon(4% 0, 100% 0, 96% 100%, 0% 100%);
-  transition: all 0.15s;
+  transition: background-color 0.15s, color 0.15s, transform 0.15s;
 }
 
 .p5-btn:hover {
-  background-color: var(--red-main);
+  background-color: var(--red-bright);
   color: var(--white);
   transform: scale(1.03);
 }
@@ -847,7 +932,7 @@ body {
 /* 5. Roadmap */
 .timeline {
   position: relative;
-  padding-left: 24px;
+  padding-left: 34px;
   border-left: 2px solid var(--border-red);
   display: flex;
   flex-direction: column;
@@ -867,19 +952,21 @@ body {
 
 .tl-marker {
   position: absolute;
-  left: -32px;
-  top: 24px;
-  width: 14px;
-  height: 14px;
+  left: -46px;
+  top: 22px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 800;
   background-color: var(--bg-dark);
-  border: 2px solid var(--gray);
-  transform: rotate(45deg);
+  color: var(--gray);
+  border: 1px solid var(--border-red);
+  padding: 1px 5px;
 }
 
 .timeline-item.active .tl-marker {
   background-color: var(--red-main);
+  color: var(--white);
   border-color: var(--white);
-  box-shadow: 0 0 10px var(--red-main);
 }
 
 .tl-top {
@@ -926,46 +1013,54 @@ body {
 .p5-contact {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
   background-color: var(--bg-panel);
   border: 1px solid var(--border-red);
-  padding: 14px 18px;
+  padding: 14px 16px;
   text-decoration: none;
   color: var(--white);
   text-align: left;
   cursor: pointer;
-  transition: all 0.15s;
+  transition: background-color 0.15s, border-color 0.15s, transform 0.15s;
   clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
 }
 
 .p5-contact:hover {
-  background-color: var(--red-main);
-  border-color: var(--red-main);
+  background-color: var(--red-bright);
+  border-color: var(--white);
   transform: translateX(4px);
 }
 
-.c-icon {
-  color: var(--red-main);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.c-glyph {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: var(--red-accent-text);
+  background-color: var(--bg-dark);
+  border: 1px solid var(--border-red);
+  padding: 4px 7px;
+  letter-spacing: 0.5px;
   flex-shrink: 0;
+  transition: background-color 0.15s, color 0.15s, border-color 0.15s, transform 0.15s;
 }
 
-.p5-contact:hover .c-icon {
-  color: var(--white);
+.p5-contact:hover .c-glyph {
+  background-color: var(--white);
+  color: var(--bg-dark);
+  border-color: var(--white);
+  transform: skewX(-8deg);
 }
 
 .c-label {
   display: block;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.7rem;
-  color: var(--red-main);
+  font-size: 0.72rem;
+  color: var(--red-accent-text);
   font-weight: 800;
 }
 
 .p5-contact:hover .c-label {
-  color: var(--bg-dark);
+  color: var(--white);
 }
 
 .c-val {
@@ -994,7 +1089,7 @@ body {
 }
 
 .footer-code {
-  color: var(--red-main);
+  color: var(--red-accent-text);
   font-weight: bold;
 }
 
@@ -1008,19 +1103,25 @@ body {
     padding: 0 8px;
   }
 
-  /* Тонкая шапка */
   .header {
     position: static;
     border-bottom-width: 1px;
   }
 
   .header-inner {
-    padding: 6px 8px;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 8px;
     gap: 8px;
   }
 
+  .brand {
+    justify-content: space-between;
+    width: 100%;
+  }
+
   .logo {
-    font-size: 1.15rem;
+    font-size: 1.2rem;
     letter-spacing: 1px;
   }
 
@@ -1030,49 +1131,49 @@ body {
   }
 
   .header-controls {
+    flex-direction: column;
+    align-items: stretch;
     width: 100%;
-    justify-content: space-between;
-    gap: 8px;
+    gap: 6px;
   }
 
   .nav {
-    overflow-x: auto;
-    flex-wrap: nowrap;
-    gap: 8px;
-    padding: 2px 0;
-    scrollbar-width: none;
-  }
-
-  .nav::-webkit-scrollbar {
-    display: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+    width: 100%;
   }
 
   .nav a {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    gap: 5px;
-    font-size: 0.9rem;
-    padding: 4px 9px;
+    justify-content: flex-start;
+    gap: 6px;
+    font-size: 0.85rem;
+    padding: 6px 8px;
     background-color: var(--bg-panel);
     border: 1px solid var(--border-red);
     border-left: 2px solid var(--red-main);
     color: var(--white);
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .nav a::before {
     content: attr(data-num);
-    color: var(--red-main);
-    padding-right: 5px;
+    color: var(--red-accent-text);
+    padding-right: 6px;
     border-right: 1px solid var(--border-red);
+    flex-shrink: 0;
   }
 
   .lang-btn {
-    font-size: 0.9rem;
-    padding: 4px 8px;
+    align-self: flex-end;
+    font-size: 0.85rem;
+    padding: 5px 10px;
     clip-path: none;
   }
 
-  /* Плотные секции */
   .section {
     padding: 16px 0;
   }
@@ -1097,7 +1198,6 @@ body {
     font-size: 0.95rem;
   }
 
-  /* 1. Мини-Hero */
   .hero {
     padding-top: 8px;
   }
@@ -1134,9 +1234,15 @@ body {
   }
 
   .highlight-cut {
-    padding: 1px 6px;
+    padding: 1px 8px;
     margin-top: 2px;
     box-shadow: 2px 2px 0px var(--white);
+  }
+
+  .highlight-cut::before,
+  .highlight-cut::after {
+    top: 1px;
+    left: 8px;
   }
 
   .lead {
@@ -1159,7 +1265,6 @@ body {
     clip-path: none;
   }
 
-  /* Терминал на телефоне в 2 строки, чтобы не слипалось */
   .cli-box {
     flex-direction: column;
     align-items: flex-start;
@@ -1187,25 +1292,20 @@ body {
     min-height: 14px;
   }
 
-  /* Компактный системный монитор */
   .sys-monitor {
     padding: 8px;
     clip-path: none;
   }
 
-  .mon-radar {
-    display: none;
-  }
-
   .mon-header {
     padding-bottom: 4px;
+    margin-bottom: 6px;
   }
 
   .mon-rows {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4px 6px;
-    margin-top: 6px;
   }
 
   .mon-row {
@@ -1226,7 +1326,6 @@ body {
     padding-top: 4px;
   }
 
-  /* 2. Навыки */
   .grid-3 {
     grid-template-columns: 1fr;
     gap: 8px;
@@ -1243,22 +1342,10 @@ body {
     top: 2px;
   }
 
-  .module-icon {
-    display: inline-block;
-    vertical-align: middle;
-    margin-bottom: 0;
-    margin-right: 6px;
-  }
-
-  .module-icon svg {
-    width: 15px;
-    height: 15px;
-  }
-
-  .module-tag {
-    display: inline-block;
-    vertical-align: middle;
-    margin-bottom: 0;
+  .module-glyph {
+    font-size: 0.8rem;
+    padding: 1px 6px;
+    margin-bottom: 4px;
   }
 
   .skill-module h3 {
@@ -1280,7 +1367,6 @@ body {
     clip-path: none;
   }
 
-  /* 3. BF1 */
   .bf1-terminal {
     padding: 10px;
     border-width: 1px;
@@ -1335,7 +1421,6 @@ body {
     gap: 8px;
   }
 
-  /* 4. Витрина проекта */
   .archive-showcase {
     grid-template-columns: 1fr auto;
     border-width: 1px;
@@ -1365,9 +1450,8 @@ body {
     clip-path: none;
   }
 
-  /* 5. Roadmap */
   .timeline {
-    padding-left: 12px;
+    padding-left: 24px;
     gap: 6px;
   }
 
@@ -1376,10 +1460,10 @@ body {
   }
 
   .tl-marker {
-    left: -17px;
-    top: 11px;
-    width: 8px;
-    height: 8px;
+    left: -32px;
+    top: 10px;
+    font-size: 0.72rem;
+    padding: 1px 4px;
   }
 
   .tl-top {
@@ -1391,7 +1475,6 @@ body {
     font-size: 1.1rem;
   }
 
-  /* 6. Контакты */
   .contacts-grid {
     grid-template-columns: 1fr 1fr;
     gap: 6px;
@@ -1403,9 +1486,9 @@ body {
     clip-path: none;
   }
 
-  .c-icon svg {
-    width: 14px;
-    height: 14px;
+  .c-glyph {
+    font-size: 0.78rem;
+    padding: 2px 5px;
   }
 
   .c-val {
