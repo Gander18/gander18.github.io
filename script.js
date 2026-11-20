@@ -1,4 +1,5 @@
 const SPOTIFY_URL = 'https://open.spotify.com/playlist/6IWrQPPMRPdiVHdEldgzyk?si=895dd11543534ada';
+const LPB_REPO_URL = 'https://github.com/Gander18/Lite-Pixel-Blood';
 
 // 1. Словарь переводов RU / EN
 const translations = {
@@ -26,7 +27,7 @@ const translations = {
     bf1_main_weapon: 'M1917 MG (Лёгкий / Линза — по карте)',
     sec_projects: 'МОИ ТВОРЕНИЯ',
     proj_lpb_desc: 'Мод для People Playground с оптимизированной пиксельной кровью и гибкими настройками. Более 15 000 подписчиков в мастерской.',
-    proj_lpb_btn: 'STEAM WORKSHOP ↗',
+    proj_lpb_btn: 'GITHUB РЕПОЗИТОРИЙ ↗',
     proj_subs_label: 'ПОДПИСЧИКОВ',
     sec_plans: 'ПЛАНЫ НА БУДУЩЕЕ',
     plan_1_desc: 'Полный перенос оригинального LPB на язык Lua.',
@@ -37,10 +38,11 @@ const translations = {
     plan_4_desc: 'Докрутить интерфейс, подключить рабочие ссылки на проекты и расширить функционал.',
     sec_contacts: 'КАНАЛЫ СВЯЗИ',
     contacts_desc: '&gt; Выбери узел для прямого подключения или скопируй тег в буфер обмена:',
-    cmd_help: 'Доступные команды: status, stack, bgm, aliases, clear, take your heart',
+    cmd_help: 'Доступные команды: status, stack, bgm, repo, aliases, clear, take your heart',
     cmd_status: '[OK] Система стабильна. Физика крови переведена в 0% PhysX mode.',
     cmd_stack: 'Языки: C#, C++, Lua | Софт: Godot Engine, Blender, Visual Studio.',
     cmd_aliases: 'Известные позывные: Gander18, primagander18, gander, primagander228, gander18sus и др.',
+    cmd_repo: `📦 REPO: <a href="${LPB_REPO_URL}" target="_blank" rel="noopener" style="color: var(--red-main); text-decoration: underline;">GitHub / Lite-Pixel-Blood ↗</a>`,
     cmd_bgm: `🎵 BGM_STREAM: <a href="${SPOTIFY_URL}" target="_blank" rel="noopener" style="color: var(--red-main); text-decoration: underline;">Открыть плейлист в Spotify ↗</a>`,
     cmd_heart: '⚡ CALLING CARD SENT: Похищаем ваш FPS и возвращаем в двойном объёме.',
     cmd_layout: '⚠️ Эй, гений, раскладку на английскую переключи! Терминал понимает только латиницу.',
@@ -70,7 +72,7 @@ const translations = {
     bf1_main_weapon: 'M1917 MG (Low Weight / Telescopic — map dependent)',
     sec_projects: 'MY CREATIONS',
     proj_lpb_desc: 'People Playground mod featuring optimized pixel blood and flexible settings. Over 15,000 subscribers on the Steam Workshop.',
-    proj_lpb_btn: 'STEAM WORKSHOP ↗',
+    proj_lpb_btn: 'GITHUB REPOSITORY ↗',
     proj_subs_label: 'SUBSCRIBERS',
     sec_plans: 'FUTURE ROADMAP',
     plan_1_desc: 'Full port of the original LPB mod to Lua.',
@@ -81,10 +83,11 @@ const translations = {
     plan_4_desc: 'Polishing the UI, linking active projects, and expanding terminal features.',
     sec_contacts: 'COMMS CHANNELS',
     contacts_desc: '&gt; Select a node for direct connection or click to copy tag to clipboard:',
-    cmd_help: 'Available commands: status, stack, bgm, aliases, clear, take your heart',
+    cmd_help: 'Available commands: status, stack, bgm, repo, aliases, clear, take your heart',
     cmd_status: '[OK] System nominal. Blood physics switched to 0% PhysX mode.',
     cmd_stack: 'Languages: C#, C++, Lua | Tools: Godot Engine, Blender, Visual Studio.',
     cmd_aliases: 'Known aliases: Gander18, primagander18, gander, primagander228, gander18sus, etc.',
+    cmd_repo: `📦 REPO: <a href="${LPB_REPO_URL}" target="_blank" rel="noopener" style="color: var(--red-main); text-decoration: underline;">GitHub / Lite-Pixel-Blood ↗</a>`,
     cmd_bgm: `🎵 BGM_STREAM: <a href="${SPOTIFY_URL}" target="_blank" rel="noopener" style="color: var(--red-main); text-decoration: underline;">Open Spotify Playlist ↗</a>`,
     cmd_heart: '⚡ CALLING CARD SENT: Stealing your FPS and returning it doubled.',
     cmd_layout: '⚠️ Genius, switch your keyboard layout to English! This terminal only reads Latin characters.',
@@ -127,7 +130,7 @@ if (langToggleBtn) {
   });
 }
 
-// 2. Надёжное копирование в буфер обмена (работает и на ПК, и на всех мобильных браузерах)
+// 2. Надёжное копирование в буфер обмена
 function copyToClipboard(text) {
   if (navigator.clipboard && window.isSecureContext) {
     return navigator.clipboard.writeText(text);
@@ -171,7 +174,7 @@ document.querySelectorAll('.copy-btn').forEach(btn => {
   });
 });
 
-// 3. Интерактивный терминал (обработка формы: работает и по Enter, и по кнопке EXEC)
+// 3. Интерактивный терминал
 const cliForm = document.getElementById('cli-form');
 const cliInput = document.getElementById('cli-input');
 const cliOutput = document.getElementById('cli-output');
@@ -187,7 +190,6 @@ if (cliForm && cliInput && cliOutput) {
 
     const dict = translations[currentLang];
 
-    // Проверка на любую не-английскую раскладку
     if (/[^\u0000-\u007F]/.test(rawCmd)) {
       cliOutput.innerHTML = `<span style="color: var(--red-main)">&gt;</span> ${dict.cmd_layout}`;
       return;
@@ -203,6 +205,7 @@ if (cliForm && cliInput && cliOutput) {
       'status': dict.cmd_status,
       'stack': dict.cmd_stack,
       'bgm': dict.cmd_bgm,
+      'repo': dict.cmd_repo,
       'aliases': dict.cmd_aliases,
       'take your heart': dict.cmd_heart
     };
@@ -229,61 +232,95 @@ if (sessionTimerEl) {
   }, 1000);
 }
 
-// 5. Автообновление статистики Battlefield 1 через GameTools API
+// 5. Автообновление статистики Battlefield 1 с кэшем (15 мин) и таймаутом (5 сек)
+function renderBF1Data(data, statusLabel, isLive) {
+  if (data.rank !== undefined) {
+    const baseRank = `RANK ${data.rank}`;
+    const rawName = data.rankName ? data.rankName.trim() : '';
+    const rankSuffix = (rawName && rawName.toUpperCase() !== baseRank)
+      ? ` // ${rawName.toUpperCase()}`
+      : '';
+    document.getElementById('bf1-rank').textContent = `${baseRank}${rankSuffix}`;
+  }
+  if (data.killDeath !== undefined) {
+    document.getElementById('bf1-kd').textContent = data.killDeath;
+  }
+  if (data.winPercent !== undefined) {
+    document.getElementById('bf1-win').textContent = data.winPercent;
+  }
+  if (data.scorePerMinute !== undefined) {
+    document.getElementById('bf1-spm').textContent = data.scorePerMinute;
+  }
+  if (data.kills !== undefined) {
+    document.getElementById('bf1-kills').textContent = Number(data.kills).toLocaleString('en-US');
+  }
+  if (data.secondsPlayed !== undefined) {
+    const hours = Math.floor(data.secondsPlayed / 3600);
+    document.getElementById('bf1-time').textContent = `${hours}h`;
+  }
+  if (data.bestClass) {
+    document.getElementById('bf1-class').textContent = data.bestClass.toUpperCase();
+  }
+  if (Array.isArray(data.weapons) && data.weapons.length > 0) {
+    const topWeapon = [...data.weapons].sort((a, b) => b.kills - a.kills)[0];
+    if (topWeapon && topWeapon.weaponName) {
+      document.getElementById('bf1-weapon').textContent = `${topWeapon.weaponName} (${topWeapon.kills} kills)`;
+    }
+  }
+
+  const syncEl = document.getElementById('bf1-sync');
+  if (syncEl) {
+    syncEl.textContent = statusLabel;
+    syncEl.classList.toggle('live', isLive);
+  }
+}
+
 async function loadBF1Stats() {
   const syncEl = document.getElementById('bf1-sync');
   const apiLang = currentLang === 'ru' ? 'ru-ru' : 'en-us';
+  const cacheKey = `gander18_bf1_${apiLang}`;
+  const CACHE_TTL = 15 * 60 * 1000; // 15 минут между запросами к API
+  const FETCH_TIMEOUT = 5000;       // 5 секунд таймаут ожидания ответа
+
+  // 1. Проверяем свежий кэш в localStorage, чтобы не спамить API при F5 и смене языка
+  try {
+    const cachedRaw = localStorage.getItem(cacheKey);
+    if (cachedRaw) {
+      const cached = JSON.parse(cachedRaw);
+      if (Date.now() - cached.timestamp < CACHE_TTL && cached.data) {
+        renderBF1Data(cached.data, '[LIVE API]', true);
+        return;
+      }
+    }
+  } catch (e) {
+    // Игнорируем ошибки парсинга localStorage
+  }
+
+  // 2. Если кэш устарел — делаем запрос с жёстким таймаутом
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT);
   const apiUrl = `https://api.gametools.network/bf1/stats/?name=PrimaGander18&platform=pc&lang=${apiLang}`;
 
   try {
-    const response = await fetch(apiUrl);
-    if (!response.ok) throw new Error('API недоступно');
+    const response = await fetch(apiUrl, { signal: controller.signal });
+    clearTimeout(timeoutId);
+
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const data = await response.json();
 
-    if (data.rank !== undefined) {
-      const baseRank = `RANK ${data.rank}`;
-      const rawName = data.rankName ? data.rankName.trim() : '';
-      const rankSuffix = (rawName && rawName.toUpperCase() !== baseRank)
-        ? ` // ${rawName.toUpperCase()}`
-        : '';
-      document.getElementById('bf1-rank').textContent = `${baseRank}${rankSuffix}`;
-    }
-    if (data.killDeath !== undefined) {
-      document.getElementById('bf1-kd').textContent = data.killDeath;
-    }
-    if (data.winPercent !== undefined) {
-      document.getElementById('bf1-win').textContent = data.winPercent;
-    }
-    if (data.scorePerMinute !== undefined) {
-      document.getElementById('bf1-spm').textContent = data.scorePerMinute;
-    }
-    if (data.kills !== undefined) {
-      document.getElementById('bf1-kills').textContent = data.kills.toLocaleString('en-US');
-    }
-    if (data.secondsPlayed !== undefined) {
-      const hours = Math.floor(data.secondsPlayed / 3600);
-      document.getElementById('bf1-time').textContent = `${hours}h`;
-    }
-    if (data.bestClass) {
-      document.getElementById('bf1-class').textContent = data.bestClass.toUpperCase();
-    }
+    localStorage.setItem(cacheKey, JSON.stringify({
+      timestamp: Date.now(),
+      data: data
+    }));
 
-    if (Array.isArray(data.weapons) && data.weapons.length > 0) {
-      const topWeapon = [...data.weapons].sort((a, b) => b.kills - a.kills)[0];
-      if (topWeapon && topWeapon.weaponName) {
-        document.getElementById('bf1-weapon').textContent = `${topWeapon.weaponName} (${topWeapon.kills} kills)`;
-      }
-    }
-
-    if (syncEl) {
-      syncEl.textContent = '[LIVE API]';
-      syncEl.classList.add('live');
-    }
+    renderBF1Data(data, '[LIVE API]', true);
   } catch (err) {
+    clearTimeout(timeoutId);
     if (syncEl) {
       syncEl.textContent = '[CACHED]';
+      syncEl.classList.remove('live');
     }
-    console.warn('Не удалось обновить стату BF1 через API:', err);
+    console.warn('BF1 API таймаут или лимит, показан кэш:', err);
   }
 }
 
