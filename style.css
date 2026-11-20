@@ -968,7 +968,7 @@ body {
 
 /* ================= МИНИ-ВЕРСИЯ ДЛЯ ТЕЛЕФОНОВ (<= 780px) ================= */
 /* Сверхкомпактные виджеты-блоки без пустого воздуха */
-@media (max-width: 780px) {
+@media (max-width: 900px), (hover: none) and (pointer: coarse) {
   html {
     font-size: 11px;
   }
