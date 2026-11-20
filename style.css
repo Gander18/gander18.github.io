@@ -13,10 +13,12 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  min-width: 0;
 }
 
 html {
   scroll-behavior: smooth;
+  font-size: 16px;
 }
 
 body {
@@ -30,6 +32,7 @@ body {
   font-family: 'Century Gothic', 'JetBrains Mono', sans-serif;
   line-height: 1.6;
   min-height: 100vh;
+  width: 100%;
   overflow-x: hidden;
 }
 
@@ -177,6 +180,7 @@ body {
   align-items: center;
   gap: 12px;
   margin-bottom: 30px;
+  flex-wrap: wrap;
 }
 
 .sec-num {
@@ -213,6 +217,8 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
   background-color: var(--red-main);
   color: var(--bg-dark);
   font-family: 'JetBrains Mono', monospace;
@@ -365,6 +371,7 @@ body {
   color: var(--white);
   margin-top: 10px;
   min-height: 20px;
+  word-break: break-word;
 }
 
 /* Правая колонка Hero: Системный монитор */
@@ -414,6 +421,7 @@ body {
 .mon-row {
   display: flex;
   justify-content: space-between;
+  gap: 8px;
   border-bottom: 1px solid rgba(82, 16, 29, 0.4);
   padding-bottom: 4px;
 }
@@ -425,6 +433,7 @@ body {
 .m-val {
   color: var(--white);
   font-weight: 700;
+  text-align: right;
 }
 
 .m-val.accent {
@@ -535,6 +544,7 @@ body {
   align-items: flex-end;
   gap: 2px;
   height: 12px;
+  flex-shrink: 0;
 }
 
 .bgm-eq span {
@@ -584,6 +594,7 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-wrap: wrap;
 }
 
 .card-id {
@@ -700,6 +711,10 @@ body {
   gap: 6px;
 }
 
+.weapon-info {
+  word-break: break-word;
+}
+
 /* 4. Мои творения */
 .archive-showcase {
   display: grid;
@@ -721,6 +736,7 @@ body {
   display: flex;
   align-items: center;
   gap: 12px;
+  flex-wrap: wrap;
   font-family: 'JetBrains Mono', monospace;
 }
 
@@ -797,11 +813,11 @@ body {
 /* 5. Roadmap */
 .timeline {
   position: relative;
-  padding-left: 28px;
+  padding-left: 24px;
   border-left: 2px solid var(--border-red);
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
 }
 
 .timeline-item {
@@ -817,7 +833,7 @@ body {
 
 .tl-marker {
   position: absolute;
-  left: -36px;
+  left: -32px;
   top: 24px;
   width: 14px;
   height: 14px;
@@ -869,7 +885,7 @@ body {
 /* 6. Контакты */
 .contacts-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 14px;
 }
 
@@ -921,8 +937,9 @@ body {
 .c-val {
   display: block;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   font-weight: 700;
+  word-break: break-all;
 }
 
 /* Подвал */
@@ -947,15 +964,27 @@ body {
   font-weight: bold;
 }
 
-/* Адаптив для мобилок и планшетов */
+/* Адаптив и пропорциональное масштабирование для телефонов */
 @media (max-width: 780px) {
+  html {
+    font-size: 13.5px;
+  }
+
+  .container {
+    padding: 0 14px;
+  }
+
+  .header {
+    position: static;
+  }
+
   .header-inner {
-    padding: 8px 14px;
+    padding: 10px 14px;
     gap: 8px;
   }
 
   .logo {
-    font-size: 1.05rem;
+    font-size: 1.1rem;
   }
 
   .header-controls {
@@ -964,7 +993,6 @@ body {
     gap: 8px;
   }
 
-  /* Горизонтальный скролл меню в одну линию вместо 3 этажей */
   .nav {
     overflow-x: auto;
     flex-wrap: nowrap;
@@ -978,38 +1006,79 @@ body {
   }
 
   .nav a {
-    font-size: 0.72rem;
-    padding: 3px 6px;
-  }
-
-  .lang-btn {
-    font-size: 0.72rem;
-    padding: 4px 8px;
+    font-size: 0.75rem;
+    padding: 4px 6px;
   }
 
   .hero {
-    padding-top: 24px;
+    padding-top: 20px;
+  }
+
+  .terminal-bar {
+    font-size: 0.7rem;
+    padding: 5px 10px;
   }
 
   .hero-box {
-    padding: 22px 18px;
+    padding: 18px 14px;
+    box-shadow: 4px 4px 0px rgba(230, 0, 43, 0.25);
   }
 
   .hero-grid,
   .bf1-bento,
   .archive-showcase {
     grid-template-columns: 1fr;
+    gap: 18px;
   }
 
   .hero h1 {
     font-size: 2rem;
   }
 
+  .cli-box {
+    padding: 8px 10px;
+    font-size: 0.8rem;
+  }
+
+  .prompt {
+    font-size: 0.75rem;
+  }
+
   .section {
-    padding: 44px 0;
+    padding: 38px 0;
   }
 
   .section-title {
     font-size: 1.35rem;
+    padding: 2px 12px;
+  }
+
+  .bf1-terminal {
+    padding: 16px;
+    box-shadow: 4px 4px 0px rgba(230, 0, 43, 0.2);
+  }
+
+  .stat-big {
+    font-size: 1.9rem;
+  }
+
+  .archive-showcase {
+    box-shadow: 4px 4px 0px var(--red-main);
+  }
+
+  .archive-main {
+    padding: 20px 16px;
+  }
+
+  .archive-metric {
+    padding: 18px;
+  }
+
+  .metric-number {
+    font-size: 2.4rem;
+  }
+
+  .contacts-grid {
+    grid-template-columns: 1fr;
   }
 }
