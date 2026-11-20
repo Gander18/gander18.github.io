@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=4">
+  <link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
 
@@ -30,7 +30,7 @@
           <a href="#plans" data-num="05" data-i18n="nav_plans">ПЛАНЫ</a>
           <a href="#contacts" data-num="06" data-i18n="nav_contacts">СВЯЗЬ</a>
         </nav>
-        <button id="lang-toggle" class="lang-btn" title="Switch language">LANG: RU</button>
+        <button type="button" id="lang-toggle" class="lang-btn" title="Switch language">LANG: RU</button>
       </div>
     </div>
   </header>
@@ -74,12 +74,15 @@
                 </div>
               </div>
 
-              <div>
-                <!-- Интерактивная командная строка -->
-                <div class="cli-box">
+              <!-- Интерактивная командная строка (работает и по Enter, и по кнопке EXEC) -->
+              <div class="cli-wrapper">
+                <form id="cli-form" class="cli-box">
                   <span class="prompt">root@gander18:~$</span>
-                  <input type="text" id="cli-input" placeholder="введи help, bgm или take your heart..." autocomplete="off" spellcheck="false">
-                </div>
+                  <div class="cli-input-row">
+                    <input type="text" id="cli-input" placeholder="введи help, bgm или take your heart..." autocomplete="off" spellcheck="false">
+                    <button type="submit" class="cli-submit-btn">EXEC</button>
+                  </div>
+                </form>
                 <div id="cli-output" class="cli-output"></div>
               </div>
             </div>
@@ -263,7 +266,7 @@
                 <span id="bf1-weapon">M1909 Benét–Mercié Telescopic (405 kills)</span>
               </div>
             </div>
-            <a href="https://tracker.gg/bf1/profile/origin/PrimaGander18/overview" class="p5-btn" target="_blank">TRACKER.GG ↗</a>
+            <a href="https://tracker.gg/bf1/profile/origin/PrimaGander18/overview" class="p5-btn" target="_blank" rel="noopener">TRACKER.GG ↗</a>
           </div>
         </div>
       </section>
@@ -283,7 +286,7 @@
             </div>
             <h3>Lite Pixel Blood</h3>
             <p data-i18n="proj_lpb_desc">Мод для People Playground с оптимизированной пиксельной кровью и гибкими настройками. Более 15 000 подписчиков в мастерской.</p>
-            <a href="#" class="p5-btn" target="_blank" data-i18n="proj_lpb_btn">ОТКРЫТЬ АРХИВ (СКОРО) ➔</a>
+            <a href="https://steamcommunity.com/workshop/browse/?appid=1118200&searchtext=Lite+Pixel+Blood" class="p5-btn" target="_blank" rel="noopener" data-i18n="proj_lpb_btn">STEAM WORKSHOP ↗</a>
           </div>
 
           <div class="archive-metric">
@@ -357,7 +360,7 @@
         <p class="section-desc" data-i18n="contacts_desc">&gt; Выбери узел для прямого подключения или скопируй тег в буфер обмена:</p>
 
         <div class="contacts-grid">
-          <a href="https://steamcommunity.com/id/67676767AAAAAAAAAAAAAAA/" class="p5-contact" target="_blank">
+          <a href="https://steamcommunity.com/id/67676767AAAAAAAAAAAAAAA/" class="p5-contact" target="_blank" rel="noopener">
             <div class="c-icon">
               <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
                 <circle cx="12" cy="12" r="10"></circle>
@@ -371,7 +374,7 @@
             </div>
           </a>
 
-          <a href="https://www.youtube.com/@Gander18" class="p5-contact" target="_blank">
+          <a href="https://www.youtube.com/@Gander18" class="p5-contact" target="_blank" rel="noopener">
             <div class="c-icon">
               <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
                 <rect x="2" y="5" width="20" height="14" rx="3"></rect>
@@ -384,7 +387,7 @@
             </div>
           </a>
 
-          <a href="https://www.reddit.com/user/Primagander228/" class="p5-contact" target="_blank">
+          <a href="https://www.reddit.com/user/Primagander228/" class="p5-contact" target="_blank" rel="noopener">
             <div class="c-icon">
               <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
                 <circle cx="12" cy="13" r="8"></circle>
@@ -400,7 +403,7 @@
             </div>
           </a>
 
-          <button class="p5-contact copy-btn" data-copy="primagander">
+          <button type="button" class="p5-contact copy-btn" data-copy="primagander">
             <div class="c-icon">
               <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
@@ -412,7 +415,7 @@
             </div>
           </button>
 
-          <button class="p5-contact copy-btn" data-copy="PrimaGander18">
+          <button type="button" class="p5-contact copy-btn" data-copy="PrimaGander18">
             <div class="c-icon">
               <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2">
                 <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
@@ -451,6 +454,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=4"></script>
+  <script src="script.js?v=5"></script>
 </body>
 </html>

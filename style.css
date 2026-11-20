@@ -335,13 +335,17 @@ body {
 }
 
 /* CLI */
+.cli-wrapper {
+  width: 100%;
+}
+
 .cli-box {
   display: flex;
   align-items: center;
   gap: 10px;
   background-color: var(--bg-dark);
   border: 1px solid var(--border-red);
-  padding: 10px 14px;
+  padding: 8px 12px;
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.88rem;
 }
@@ -355,6 +359,15 @@ body {
   color: var(--red-main);
   font-weight: bold;
   white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.cli-input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  width: 100%;
 }
 
 #cli-input {
@@ -365,13 +378,32 @@ body {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.88rem;
   width: 100%;
+  flex: 1;
+}
+
+.cli-submit-btn {
+  background-color: var(--red-main);
+  color: var(--white);
+  border: none;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 4px 10px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+.cli-submit-btn:hover {
+  background-color: var(--white);
+  color: var(--bg-dark);
 }
 
 .cli-output {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.84rem;
   color: var(--white);
-  margin-top: 10px;
+  margin-top: 8px;
   min-height: 20px;
   word-break: break-word;
 }
@@ -1003,7 +1035,6 @@ body {
     gap: 8px;
   }
 
-  /* Чётко разделённые кнопки навигации без слипания */
   .nav {
     overflow-x: auto;
     flex-wrap: nowrap;
@@ -1089,7 +1120,7 @@ body {
   }
 
   .hero-left {
-    gap: 8px;
+    gap: 10px;
   }
 
   .alias-tag {
@@ -1128,13 +1159,31 @@ body {
     clip-path: none;
   }
 
+  /* Терминал на телефоне в 2 строки, чтобы не слипалось */
   .cli-box {
-    padding: 5px 8px;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 8px;
     gap: 6px;
   }
 
+  .cli-input-row {
+    width: 100%;
+    border-top: 1px dashed var(--border-red);
+    padding-top: 6px;
+  }
+
+  #cli-input {
+    font-size: 1rem;
+  }
+
+  .cli-submit-btn {
+    padding: 5px 10px;
+    font-size: 0.85rem;
+  }
+
   .cli-output {
-    margin-top: 5px;
+    margin-top: 6px;
     min-height: 14px;
   }
 
@@ -1177,7 +1226,7 @@ body {
     padding-top: 4px;
   }
 
-  /* 2. Навыки — мини-карточки */
+  /* 2. Навыки */
   .grid-3 {
     grid-template-columns: 1fr;
     gap: 8px;
@@ -1231,7 +1280,7 @@ body {
     clip-path: none;
   }
 
-  /* 3. BF1 — мини-информер */
+  /* 3. BF1 */
   .bf1-terminal {
     padding: 10px;
     border-width: 1px;

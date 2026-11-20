@@ -26,7 +26,7 @@ const translations = {
     bf1_main_weapon: 'M1917 MG (Лёгкий / Линза — по карте)',
     sec_projects: 'МОИ ТВОРЕНИЯ',
     proj_lpb_desc: 'Мод для People Playground с оптимизированной пиксельной кровью и гибкими настройками. Более 15 000 подписчиков в мастерской.',
-    proj_lpb_btn: 'ОТКРЫТЬ АРХИВ (СКОРО) ➔',
+    proj_lpb_btn: 'STEAM WORKSHOP ↗',
     proj_subs_label: 'ПОДПИСЧИКОВ',
     sec_plans: 'ПЛАНЫ НА БУДУЩЕЕ',
     plan_1_desc: 'Полный перенос оригинального LPB на язык Lua.',
@@ -70,7 +70,7 @@ const translations = {
     bf1_main_weapon: 'M1917 MG (Low Weight / Telescopic — map dependent)',
     sec_projects: 'MY CREATIONS',
     proj_lpb_desc: 'People Playground mod featuring optimized pixel blood and flexible settings. Over 15,000 subscribers on the Steam Workshop.',
-    proj_lpb_btn: 'OPEN ARCHIVE (SOON) ➔',
+    proj_lpb_btn: 'STEAM WORKSHOP ↗',
     proj_subs_label: 'SUBSCRIBERS',
     sec_plans: 'FUTURE ROADMAP',
     plan_1_desc: 'Full port of the original LPB mod to Lua.',
@@ -127,14 +127,37 @@ if (langToggleBtn) {
   });
 }
 
-// 2. Копирование Discord / Epic Games по клику
+// 2. Надёжное копирование в буфер обмена (работает и на ПК, и на всех мобильных браузерах)
+function copyToClipboard(text) {
+  if (navigator.clipboard && window.isSecureContext) {
+    return navigator.clipboard.writeText(text);
+  }
+  return new Promise((resolve, reject) => {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    textArea.style.position = 'fixed';
+    textArea.style.left = '-9999px';
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    try {
+      document.execCommand('copy');
+      resolve();
+    } catch (err) {
+      reject(err);
+    } finally {
+      document.body.removeChild(textArea);
+    }
+  });
+}
+
 document.querySelectorAll('.copy-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const textToCopy = btn.getAttribute('data-copy');
     const valSpan = btn.querySelector('.c-val');
     const originalText = valSpan.textContent;
 
-    navigator.clipboard.writeText(textToCopy).then(() => {
+    copyToClipboard(textToCopy).then(() => {
       valSpan.textContent = currentLang === 'ru' ? 'СКОПИРОВАНО!' : 'COPIED!';
       btn.style.backgroundColor = 'var(--white)';
       btn.style.color = 'var(--bg-dark)';
@@ -148,47 +171,47 @@ document.querySelectorAll('.copy-btn').forEach(btn => {
   });
 });
 
-// 3. Интерактивный терминал в главном блоке
+// 3. Интерактивный терминал (обработка формы: работает и по Enter, и по кнопке EXEC)
+const cliForm = document.getElementById('cli-form');
 const cliInput = document.getElementById('cli-input');
 const cliOutput = document.getElementById('cli-output');
 
-if (cliInput && cliOutput) {
-  cliInput.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') {
-      const rawCmd = cliInput.value.trim();
-      const cmd = rawCmd.toLowerCase();
-      cliInput.value = '';
+if (cliForm && cliInput && cliOutput) {
+  cliForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const rawCmd = cliInput.value.trim();
+    const cmd = rawCmd.toLowerCase();
+    cliInput.value = '';
 
-      if (!cmd) return;
+    if (!cmd) return;
 
-      const dict = translations[currentLang];
+    const dict = translations[currentLang];
 
-      // Пасхалка: проверка на любые не-английские буквы (кириллица, иероглифы и т.д.)
-      if (/[^\u0000-\u007F]/.test(rawCmd)) {
-        cliOutput.innerHTML = `<span style="color: var(--red-main)">&gt;</span> ${dict.cmd_layout}`;
-        return;
-      }
+    // Проверка на любую не-английскую раскладку
+    if (/[^\u0000-\u007F]/.test(rawCmd)) {
+      cliOutput.innerHTML = `<span style="color: var(--red-main)">&gt;</span> ${dict.cmd_layout}`;
+      return;
+    }
 
-      if (cmd === 'clear') {
-        cliOutput.textContent = '';
-        return;
-      }
+    if (cmd === 'clear') {
+      cliOutput.textContent = '';
+      return;
+    }
 
-      const commandMap = {
-        'help': dict.cmd_help,
-        'status': dict.cmd_status,
-        'stack': dict.cmd_stack,
-        'bgm': dict.cmd_bgm,
-        'aliases': dict.cmd_aliases,
-        'take your heart': dict.cmd_heart
-      };
+    const commandMap = {
+      'help': dict.cmd_help,
+      'status': dict.cmd_status,
+      'stack': dict.cmd_stack,
+      'bgm': dict.cmd_bgm,
+      'aliases': dict.cmd_aliases,
+      'take your heart': dict.cmd_heart
+    };
 
-      if (commandMap[cmd]) {
-        cliOutput.innerHTML = `<span style="color: var(--red-main)">&gt;</span> ${commandMap[cmd]}`;
-      } else {
-        const errText = dict.cmd_unknown.replace('{cmd}', rawCmd);
-        cliOutput.innerHTML = `<span style="color: var(--red-main)">&gt;</span> ${errText}`;
-      }
+    if (commandMap[cmd]) {
+      cliOutput.innerHTML = `<span style="color: var(--red-main)">&gt;</span> ${commandMap[cmd]}`;
+    } else {
+      const errText = dict.cmd_unknown.replace('{cmd}', rawCmd);
+      cliOutput.innerHTML = `<span style="color: var(--red-main)">&gt;</span> ${errText}`;
     }
   });
 }
