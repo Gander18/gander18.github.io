@@ -58,7 +58,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
-  background-color: rgba(9, 3, 5, 0.92);
+  background-color: rgba(9, 3, 5, 0.94);
   border-bottom: 2px solid var(--red-main);
   backdrop-filter: blur(8px);
 }
@@ -67,8 +67,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 14px 20px;
-  flex-wrap: wrap;
+  padding: 12px 20px;
   gap: 15px;
 }
 
@@ -76,6 +75,7 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
+  flex-shrink: 0;
 }
 
 .sys-dot {
@@ -107,14 +107,12 @@ body {
 .header-controls {
   display: flex;
   align-items: center;
-  gap: 18px;
-  flex-wrap: wrap;
+  gap: 16px;
 }
 
 .nav {
   display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .nav a {
@@ -123,6 +121,7 @@ body {
   color: var(--gray);
   text-decoration: none;
   padding: 4px 8px;
+  white-space: nowrap;
   transition: all 0.15s;
 }
 
@@ -144,16 +143,17 @@ body {
 
 .lang-btn {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 800;
   background-color: var(--white);
   color: var(--bg-dark);
   border: none;
-  padding: 5px 12px;
+  padding: 5px 10px;
   cursor: pointer;
   clip-path: polygon(8% 0, 100% 0, 92% 100%, 0% 100%);
   transition: all 0.15s;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .lang-btn:hover {
@@ -206,7 +206,7 @@ body {
 
 /* 1. Асимметричный Hero */
 .hero {
-  padding-top: 48px;
+  padding-top: 40px;
 }
 
 .terminal-bar {
@@ -285,6 +285,7 @@ body {
 
 /* Блок известных никнеймов */
 .aka-block {
+  display: block;
   font-family: 'JetBrains Mono', monospace;
   margin-bottom: 4px;
 }
@@ -305,6 +306,7 @@ body {
 }
 
 .aka-pill {
+  display: inline-block;
   font-size: 0.78rem;
   background-color: var(--bg-dark);
   border: 1px solid var(--border-red);
@@ -519,6 +521,8 @@ body {
   padding: 10px 14px;
   clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
   transition: all 0.15s;
+  position: relative;
+  z-index: 2;
 }
 
 .bgm-btn:hover {
@@ -943,14 +947,69 @@ body {
   font-weight: bold;
 }
 
-/* Адаптив */
+/* Адаптив для мобилок и планшетов */
 @media (max-width: 780px) {
+  .header-inner {
+    padding: 8px 14px;
+    gap: 8px;
+  }
+
+  .logo {
+    font-size: 1.05rem;
+  }
+
+  .header-controls {
+    width: 100%;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  /* Горизонтальный скролл меню в одну линию вместо 3 этажей */
+  .nav {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    gap: 4px;
+    padding-bottom: 2px;
+    scrollbar-width: none;
+  }
+
+  .nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav a {
+    font-size: 0.72rem;
+    padding: 3px 6px;
+  }
+
+  .lang-btn {
+    font-size: 0.72rem;
+    padding: 4px 8px;
+  }
+
+  .hero {
+    padding-top: 24px;
+  }
+
+  .hero-box {
+    padding: 22px 18px;
+  }
+
   .hero-grid,
   .bf1-bento,
   .archive-showcase {
     grid-template-columns: 1fr;
   }
+
   .hero h1 {
-    font-size: 2.1rem;
+    font-size: 2rem;
+  }
+
+  .section {
+    padding: 44px 0;
+  }
+
+  .section-title {
+    font-size: 1.35rem;
   }
 }

@@ -208,8 +208,13 @@ async function loadBF1Stats() {
     const data = await response.json();
 
     if (data.rank !== undefined) {
-      const rankName = data.rankName ? ` // ${data.rankName.toUpperCase()}` : '';
-      document.getElementById('bf1-rank').textContent = `RANK ${data.rank}${rankName}`;
+      const baseRank = `RANK ${data.rank}`;
+      const rawName = data.rankName ? data.rankName.trim() : '';
+      // Исключаем дубль вида "RANK 67 // RANK 67"
+      const rankSuffix = (rawName && rawName.toUpperCase() !== baseRank)
+        ? ` // ${rawName.toUpperCase()}`
+        : '';
+      document.getElementById('bf1-rank').textContent = `${baseRank}${rankSuffix}`;
     }
     if (data.killDeath !== undefined) {
       document.getElementById('bf1-kd').textContent = data.killDeath;
