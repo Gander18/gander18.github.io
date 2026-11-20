@@ -56,6 +56,8 @@ body {
   padding: 0 20px;
 }
 
+/* ================= ДЕСКТОП ВЕРСИЯ (> 780px) ================= */
+
 /* Шапка */
 .header {
   position: sticky;
@@ -964,40 +966,43 @@ body {
   font-weight: bold;
 }
 
-/* Адаптив и пропорциональное масштабирование для телефонов */
+/* ================= ОТДЕЛЬНАЯ МОБИЛЬНАЯ ВЕРСИЯ (<= 780px) ================= */
+/* Компактные мини-блоки, сетка 2x2 и уменьшенный масштаб под экран телефона */
 @media (max-width: 780px) {
   html {
-    font-size: 13.5px;
+    font-size: 12px; /* Весь сайт пропорционально уменьшается на 25% */
   }
 
   .container {
-    padding: 0 14px;
+    padding: 0 10px;
   }
 
+  /* Компактная шапка в 1 аккуратную полосу без перекрытия экрана */
   .header {
     position: static;
+    border-bottom-width: 1px;
   }
 
   .header-inner {
-    padding: 10px 14px;
-    gap: 8px;
+    padding: 8px 10px;
+    gap: 6px;
   }
 
   .logo {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
+    letter-spacing: 1px;
   }
 
   .header-controls {
     width: 100%;
     justify-content: space-between;
-    gap: 8px;
+    gap: 6px;
   }
 
   .nav {
     overflow-x: auto;
     flex-wrap: nowrap;
     gap: 4px;
-    padding-bottom: 2px;
     scrollbar-width: none;
   }
 
@@ -1006,79 +1011,257 @@ body {
   }
 
   .nav a {
-    font-size: 0.75rem;
-    padding: 4px 6px;
+    font-size: 0.85rem;
+    padding: 3px 6px;
+    background-color: var(--bg-panel);
+    border: 1px solid var(--border-red);
   }
 
-  .hero {
-    padding-top: 20px;
+  .lang-btn {
+    font-size: 0.85rem;
+    padding: 4px 8px;
+    clip-path: none;
   }
 
-  .terminal-bar {
-    font-size: 0.7rem;
-    padding: 5px 10px;
-  }
-
-  .hero-box {
-    padding: 18px 14px;
-    box-shadow: 4px 4px 0px rgba(230, 0, 43, 0.25);
-  }
-
-  .hero-grid,
-  .bf1-bento,
-  .archive-showcase {
-    grid-template-columns: 1fr;
-    gap: 18px;
-  }
-
-  .hero h1 {
-    font-size: 2rem;
-  }
-
-  .cli-box {
-    padding: 8px 10px;
-    font-size: 0.8rem;
-  }
-
-  .prompt {
-    font-size: 0.75rem;
-  }
-
+  /* Секции сжаты по высоте */
   .section {
-    padding: 38px 0;
+    padding: 24px 0;
+  }
+
+  .section-header {
+    margin-bottom: 14px;
+    gap: 8px;
   }
 
   .section-title {
     font-size: 1.35rem;
-    padding: 2px 12px;
+    padding: 2px 10px;
   }
 
+  /* Hero в формате мини-карточки */
+  .hero {
+    padding-top: 12px;
+  }
+
+  .terminal-bar {
+    font-size: 0.78rem;
+    padding: 4px 8px;
+    clip-path: none;
+  }
+
+  .hero-box {
+    padding: 14px 12px;
+    border-width: 1px;
+    box-shadow: none;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .hero-left {
+    gap: 12px;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+
+  .highlight-cut {
+    padding: 1px 8px;
+    box-shadow: 2px 2px 0px var(--white);
+  }
+
+  .lead {
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+    line-height: 1.45;
+  }
+
+  .aka-pill {
+    font-size: 0.82rem;
+    padding: 2px 7px;
+    clip-path: none;
+  }
+
+  .cli-box {
+    padding: 6px 8px;
+    gap: 6px;
+  }
+
+  /* Системный монитор превращается в компактную 2x2 плитку без лишнего радара */
+  .sys-monitor {
+    padding: 10px;
+    clip-path: none;
+  }
+
+  .mon-radar {
+    display: none;
+  }
+
+  .mon-rows {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 10px;
+    margin-top: 6px;
+  }
+
+  .mon-row {
+    flex-direction: column;
+    gap: 1px;
+    border-bottom: none;
+    background-color: var(--bg-panel);
+    padding: 5px 7px;
+    border-left: 2px solid var(--red-main);
+  }
+
+  .m-val {
+    text-align: left;
+  }
+
+  /* Навыки — компактные блоки */
+  .grid-3 {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .skill-module {
+    padding: 14px 12px;
+  }
+
+  .bg-index {
+    font-size: 3rem;
+    right: 8px;
+    top: -4px;
+  }
+
+  .module-icon {
+    margin-bottom: 6px;
+  }
+
+  .module-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .skill-bgm {
+    gap: 12px;
+  }
+
+  .bgm-btn {
+    padding: 8px 10px;
+    clip-path: none;
+  }
+
+  /* BF1 — супер-компактная сетка статов */
   .bf1-terminal {
-    padding: 16px;
-    box-shadow: 4px 4px 0px rgba(230, 0, 43, 0.2);
+    padding: 12px;
+    border-width: 1px;
+    box-shadow: none;
+  }
+
+  .bf1-header {
+    padding-bottom: 10px;
+    margin-bottom: 12px;
+  }
+
+  .bf1-bento {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .bf1-hero-stats,
+  .bf1-sub-stats {
+    gap: 8px;
+  }
+
+  .stat-hero-box {
+    padding: 10px;
+    clip-path: none;
   }
 
   .stat-big {
-    font-size: 1.9rem;
+    font-size: 1.8rem;
+    margin: 2px 0;
   }
 
+  .stat-mini {
+    padding: 8px 10px;
+  }
+
+  .bf1-footer {
+    padding-top: 10px;
+    gap: 10px;
+  }
+
+  /* Витрина проекта — горизонтальный мини-блок */
   .archive-showcase {
-    box-shadow: 4px 4px 0px var(--red-main);
+    grid-template-columns: 1fr auto;
+    border-width: 1px;
+    box-shadow: none;
   }
 
   .archive-main {
-    padding: 20px 16px;
+    padding: 12px;
+    gap: 8px;
+  }
+
+  .archive-main h3 {
+    font-size: 1.35rem;
   }
 
   .archive-metric {
-    padding: 18px;
+    padding: 12px 10px;
+    min-width: 92px;
   }
 
   .metric-number {
-    font-size: 2.4rem;
+    font-size: 1.9rem;
   }
 
+  .p5-btn {
+    padding: 7px 12px;
+    clip-path: none;
+  }
+
+  /* Roadmap — узкий таймлайн */
+  .timeline {
+    padding-left: 14px;
+    gap: 10px;
+  }
+
+  .timeline-item {
+    padding: 10px 12px;
+  }
+
+  .tl-marker {
+    left: -20px;
+    top: 14px;
+    width: 10px;
+    height: 10px;
+  }
+
+  /* Контакты — сетка 2 кнопки в ряд */
   .contacts-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .p5-contact {
+    padding: 10px;
+    gap: 8px;
+    clip-path: none;
+  }
+
+  .c-icon svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .footer {
+    padding: 14px 0;
   }
 }
