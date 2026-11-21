@@ -42,7 +42,6 @@ html {
   font-size: 16px;
 }
 
-/* Градиентный фон Battlefield 1: огонь сверху слева, холодный дым справа, тёмный дым снизу */
 body {
   background-color: var(--bg-base);
   background-image:
@@ -57,7 +56,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Дымчатая виньетка Battlefield 1 */
 .bf1-smoke-bg {
   position: fixed;
   inset: 0;
@@ -66,7 +64,6 @@ body {
   background: radial-gradient(circle at 50% 45%, transparent 45%, rgba(4, 6, 10, 0.72) 100%);
 }
 
-/* Живые летящие искры (лёгкая GPU-анимация) */
 .bf1-sparks {
   position: fixed;
   inset: 0;
