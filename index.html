@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GANDER18 // METAVERSE TERMINAL</title>
+  <title>GANDER18</title>
 
   <meta name="theme-color" content="#e6002b">
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="GANDER18 // TERMINAL">
-  <meta property="og:title" content="GANDER18 // METAVERSE TERMINAL">
-  <meta property="og:description" content="Моды для игр (Lite Pixel Blood), оптимизация софта и железа, досье BF1 и каналы связи.">
+  <meta property="og:site_name" content="GANDER18">
+  <meta property="og:title" content="GANDER18">
+  <meta property="og:description" content="Моды для игр, оптимизация, статистика Battlefield 1 и контакты.">
   <meta property="og:url" content="https://gander18.github.io/">
   <meta property="og:image" content="https://gander18.github.io/og-preview.jpg">
   <meta property="og:image:type" content="image/jpeg">
@@ -18,31 +18,30 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://gander18.github.io/og-preview.jpg">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=11">
+  <link rel="stylesheet" href="style.css?v=22">
 </head>
 <body>
 
-  <div class="crt-overlay"></div>
+  <div class="bf1-smoke-bg" aria-hidden="true"></div>
+  <div class="bf1-sparks" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span><span></span>
+  </div>
 
   <header class="header">
     <div class="container header-inner">
-      <div class="brand">
-        <span class="sys-dot"></span>
-        <a href="#" class="logo">GANDER18<span class="cursor">_</span></a>
-      </div>
+      <a href="#" class="logo">GANDER18</a>
       <div class="header-controls">
-        <nav class="nav" aria-label="Навигация по разделам">
-          <a href="#about" data-num="01" data-i18n="nav_about">КТО_Я</a>
-          <a href="#skills" data-num="02" data-i18n="nav_skills">НАВЫКИ</a>
-          <a href="#bf1" data-num="03" data-i18n="nav_bf1">BF1_СТАТА</a>
-          <a href="#projects" data-num="04" data-i18n="nav_projects">ТВОРЕНИЯ</a>
-          <a href="#plans" data-num="05" data-i18n="nav_plans">ПЛАНЫ</a>
-          <a href="#contacts" data-num="06" data-i18n="nav_contacts">СВЯЗЬ</a>
+        <nav class="nav" aria-label="Навигация">
+          <a href="#about" data-i18n="nav_about">Кто я</a>
+          <a href="#skills" data-i18n="nav_skills">Навыки</a>
+          <a href="#bf1" data-i18n="nav_bf1">Battlefield 1</a>
+          <a href="#projects" data-i18n="nav_projects">Творения</a>
+          <a href="#plans" data-i18n="nav_plans">Планы</a>
+          <a href="#contacts" data-i18n="nav_contacts">Контакты</a>
         </nav>
-        <button type="button" id="lang-toggle" class="lang-btn" title="Switch language">LANG: RU</button>
+        <button type="button" id="lang-toggle" class="lang-btn" title="Switch language">RU / EN</button>
       </div>
     </div>
   </header>
@@ -52,332 +51,225 @@
 
       <!-- 1. Кто я -->
       <section id="about" class="section hero">
-        <div class="terminal-bar">
-          <span>SYS://METAVERSE_NAV/USER_PROFILE</span>
-          <span class="status-tag">PHANTOM_MODE: ON</span>
-        </div>
-        
-        <div class="hero-box">
-          <div class="hero-grid">
-            
-            <div class="hero-left">
-              <div>
-                <div class="alias-tag">[ID] CODENAME: GANDER18 // ガンダXVIII</div>
-                <h1>
-                  <span data-i18n="hero_greeting">ПРИВЕТ, Я</span><br>
-                  <span class="highlight-cut">GANDER18</span>
-                </h1>
-                <p class="lead" data-i18n="hero_lead">
-                  &gt; Делаю моды для игр, ковыряюсь в железе и софте, пишу код на C#, C++ и Lua, иногда моделю в Blender.<br>
-                  &gt; Выжимаю максимум FPS из скромного железа и перекраиваю системы под себя.
-                </p>
+        <div class="hero-card">
+          <p class="eyebrow">GANDER18 · ガンダXVIII</p>
+          <h1>
+            <span data-i18n="hero_greeting">Привет, я</span>
+            <span class="name-plate">GANDER18</span>
+          </h1>
+          <p class="lead" data-i18n="hero_lead">
+            Делаю моды для игр, ковыряюсь в железе и софте, пишу код на C#, C++ и Lua, иногда моделю в Blender. Выжимаю максимум FPS из скромного железа и перекраиваю системы под себя.
+          </p>
 
-                <div class="aka-block">
-                  <span class="aka-label" data-i18n="aka_label">&gt; ТАКЖЕ ИЗВЕСТЕН КАК:</span>
-                  <div class="aka-tags">
-                    <span class="aka-pill">primagander18</span>
-                    <span class="aka-pill">gander</span>
-                    <span class="aka-pill">primagander228</span>
-                    <span class="aka-pill">gander18sus</span>
-                    <span class="aka-pill muted" data-i18n="aka_more">и т.д.</span>
-                  </div>
-                </div>
+          <div class="aka-block">
+            <span class="aka-label" data-i18n="aka_label">Также известен как:</span>
+            <div class="aka-tags">
+              <span class="aka-pill">primagander18</span>
+              <span class="aka-pill">gander</span>
+              <span class="aka-pill">primagander228</span>
+              <span class="aka-pill">gander18sus</span>
+              <span class="aka-pill muted" data-i18n="aka_more">и т.д.</span>
+            </div>
+          </div>
+
+          <div class="p5-rig-plate">
+            <div class="rig-header">
+              <span class="rig-title" data-i18n="rig_title">ПК И СОФТ</span>
+              <span class="rig-sub">RIG // DEV</span>
+            </div>
+            <div class="rig-lines">
+              <div class="rig-item">
+                <span class="rig-k" data-i18n="rig_hw_k">ПК:</span>
+                <span class="rig-v">i5 6600 · GT 730 4GB DDR3 · 8GB DDR4 RAM</span>
               </div>
-
-              <div class="cli-wrapper">
-                <form id="cli-form" class="cli-box">
-                  <label for="cli-input" class="prompt">root@gander18:~$</label>
-                  <div class="cli-input-row">
-                    <input type="text" id="cli-input" placeholder="введи help, bgm или take your heart..." autocomplete="off" spellcheck="false">
-                    <button type="submit" class="cli-submit-btn">EXEC</button>
-                  </div>
-                </form>
-                <div id="cli-output" class="cli-output" role="status" aria-live="polite"></div>
+              <div class="rig-item">
+                <span class="rig-k" data-i18n="rig_sw_k">Софт:</span>
+                <span class="rig-v">VS Code · Visual Studio 2022 · Blender · Godot</span>
               </div>
             </div>
-
-            <!-- Правая колонка: Системный монитор -->
-            <aside class="sys-monitor" aria-label="Системная телеметрия">
-              <div class="mon-header">
-                <span>[SYS] TELEMETRY</span>
-                <span class="mon-pulse">● LIVE</span>
-              </div>
-
-              <div class="mon-rows">
-                <div class="mon-row">
-                  <span class="m-key">CORE_STACK</span>
-                  <span class="m-val">C# / C++ / LUA</span>
-                </div>
-                <div class="mon-row">
-                  <span class="m-key">PHYSX_LOAD</span>
-                  <span class="m-val accent">0.0% [BYPASSED]</span>
-                </div>
-                <div class="mon-row">
-                  <span class="m-key">TARGET_GAME</span>
-                  <span class="m-val">PPG / BF1</span>
-                </div>
-                <div class="mon-row">
-                  <span class="m-key">SESSION_TIME</span>
-                  <span class="m-val" id="session-timer">00:00:00</span>
-                </div>
-              </div>
-
-              <div class="mon-footer">
-                <span>KERNEL: 2026.11-PHANTOM</span>
-                <span>ガンダXVIII</span>
-              </div>
-            </aside>
-
           </div>
         </div>
       </section>
 
-      <!-- 2. Что я делаю -->
+      <!-- 2. Навыки -->
       <section id="skills" class="section">
         <div class="section-header">
-          <span class="sec-num">02 //</span>
-          <h2 class="section-title" data-i18n="sec_skills">ЧТО Я ДЕЛАЮ</h2>
+          <h2 class="section-title" data-i18n="sec_skills">Что я делаю</h2>
         </div>
 
         <div class="grid-3">
-          <div class="skill-module">
-            <span class="bg-index" aria-hidden="true">01</span>
-            <div class="module-glyph" role="img" aria-label="Разработка и код">&lt;/&gt;</div>
-            <div class="module-tag">[MOD_DEV]</div>
+          <article class="card">
             <h3 data-i18n="skill_1_title">Моддинг и геймдев</h3>
-            <p data-i18n="skill_1_desc">Пишу моды (в основном под People Playground, в планах начать разбирать другие проекты), ковыряюсь в Godot Engine и собираю базовые 3D-модели в Blender.</p>
-          </div>
+            <p data-i18n="skill_1_desc">Пишу моды в основном под People Playground, в планах взяться за другие игры. Ковыряюсь в Godot Engine и собираю базовые 3D-модели в Blender.</p>
+          </article>
 
-          <div class="skill-module">
-            <span class="bg-index" aria-hidden="true">02</span>
-            <div class="module-glyph" role="img" aria-label="Системные настройки">[::]</div>
-            <div class="module-tag">[SYS_TWEAK]</div>
+          <article class="card">
             <h3 data-i18n="skill_2_title">Оптимизация и твикинг</h3>
-            <p data-i18n="skill_2_desc">Ковыряюсь в системных настройках, делаю конфиги, патчи и фиксы для игр, чтобы всё работало плавно даже на слабом железе.</p>
-          </div>
+            <p data-i18n="skill_2_desc">Настраиваю систему, делаю конфиги, патчи и фиксы для игр, чтобы всё работало плавно даже на слабом железе.</p>
+          </article>
 
-          <div class="skill-module skill-bgm">
-            <span class="bg-index" aria-hidden="true">03</span>
+          <article class="card card-bgm">
             <div>
-              <div class="module-glyph" role="img" aria-label="Музыка и саундтреки">♪//</div>
-              <div class="module-tag">[GAME_OST]</div>
               <h3 data-i18n="skill_3_title">Игры и музыка</h3>
               <p data-i18n="skill_3_desc">Зависаю в Battlefield 1 и Fortnite. Слушаю тяжёлый метал, альтернативу и саундтреки из японских игр.</p>
             </div>
-
-            <a href="https://open.spotify.com/playlist/6IWrQPPMRPdiVHdEldgzyk?si=895dd11543534ada" class="bgm-btn" target="_blank" rel="noopener">
-              <span class="bgm-eq" aria-hidden="true">
-                <span></span><span></span><span></span>
-              </span>
-              <span data-i18n="bgm_btn">BGM_ПОТОК // SPOTIFY ↗</span>
-            </a>
-          </div>
+            <a href="https://open.spotify.com/playlist/6IWrQPPMRPdiVHdEldgzyk?si=895dd11543534ada" class="p5-choice-btn" target="_blank" rel="noopener" data-i18n="bgm_btn">Spotify Playlist</a>
+          </article>
         </div>
       </section>
 
-      <!-- 3. Блок Battlefield 1 -->
+      <!-- 3. Battlefield 1 -->
       <section id="bf1" class="section">
         <div class="section-header">
-          <span class="sec-num">03 //</span>
-          <h2 class="section-title" data-i18n="sec_bf1">BATTLEFIELD 1 // ДОСЬЕ</h2>
+          <h2 class="section-title" data-i18n="sec_bf1">Battlefield 1</h2>
+          <span class="sync-status" id="bf1-sync">[SYNCING...]</span>
         </div>
 
-        <div class="bf1-terminal">
-          <div class="bf1-header">
-            <div class="bf1-id-wrap">
-              <span class="bf1-crosshair" aria-hidden="true">[+]</span>
-              <span class="card-id">SOLDIER_ID:</span>
-              <strong class="bf1-nick" id="bf1-name">PrimaGander18</strong>
-              <span class="sync-status" id="bf1-sync">[SYNCING...]</span>
+        <div class="card bf1-card">
+          <div class="bf1-top">
+            <div class="bf1-player">
+              <strong id="bf1-name">PrimaGander18</strong>
+              <span class="bf1-rank" id="bf1-rank">RANK 67</span>
             </div>
-            <span class="badge-red" id="bf1-rank">RANK 67 // FIRST LIEUTENANT VIII</span>
+            <a href="https://tracker.gg/bf1/profile/origin/PrimaGander18/overview" class="p5-choice-btn" target="_blank" rel="noopener">Tracker.gg</a>
           </div>
 
-          <div class="bf1-bento">
-            <div class="bf1-hero-stats">
-              <div class="stat-hero-box">
-                <span class="stat-label">K/D RATIO</span>
-                <span class="stat-big" id="bf1-kd">0.58</span>
-                <span class="stat-sub">COMBAT EFFICIENCY</span>
-              </div>
-              <div class="stat-hero-box">
-                <span class="stat-label">TOTAL KILLS</span>
-                <span class="stat-big" id="bf1-kills">2,065</span>
-                <span class="stat-sub">CONFIRMED ELIMINATIONS</span>
-              </div>
+          <div class="stats-grid">
+            <div class="stat-box">
+              <span class="stat-label">K/D</span>
+              <span class="stat-num" id="bf1-kd">0.58</span>
             </div>
-
-            <div class="bf1-sub-stats">
-              <div class="stat-mini">
-                <span class="stat-label">WIN RATE</span>
-                <span class="stat-value" id="bf1-win">48.5%</span>
-              </div>
-              <div class="stat-mini">
-                <span class="stat-label">SCORE / MIN</span>
-                <span class="stat-value" id="bf1-spm">1,019.67</span>
-              </div>
-              <div class="stat-mini">
-                <span class="stat-label">TIME PLAYED</span>
-                <span class="stat-value" id="bf1-time">57h</span>
-              </div>
-              <div class="stat-mini">
-                <span class="stat-label">TOP CLASS</span>
-                <span class="stat-value" id="bf1-class">SUPPORT</span>
-              </div>
+            <div class="stat-box">
+              <span class="stat-label" data-i18n="stat_kills">Убийства</span>
+              <span class="stat-num" id="bf1-kills">2 065</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-label" data-i18n="stat_win">Победы</span>
+              <span class="stat-num" id="bf1-win">48.5%</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-label" data-i18n="stat_spm">Очки / мин</span>
+              <span class="stat-num" id="bf1-spm">1 019,67</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-label" data-i18n="stat_time">В игре</span>
+              <span class="stat-num" id="bf1-time">57 ч</span>
+            </div>
+            <div class="stat-box">
+              <span class="stat-label" data-i18n="stat_class">Класс</span>
+              <span class="stat-num" id="bf1-class">SUPPORT</span>
             </div>
           </div>
 
-          <div class="bf1-footer">
-            <div class="weapon-list">
-              <div class="weapon-info">
-                <span class="card-id">MAIN WEAPON:</span>
-                <span data-i18n="bf1_main_weapon">M1917 MG (Лёгкий / Линза — по карте)</span>
-              </div>
-              <div class="weapon-info">
-                <span class="card-id">TOP BY KILLS:</span>
-                <span id="bf1-weapon">M1909 Benét–Mercié Telescopic (405 kills)</span>
-              </div>
-            </div>
-            <a href="https://tracker.gg/bf1/profile/origin/PrimaGander18/overview" class="p5-btn" target="_blank" rel="noopener">TRACKER.GG ↗</a>
+          <div class="bf1-weapons">
+            <div><strong data-i18n="bf1_main_k">Основное оружие:</strong> <span data-i18n="bf1_main_weapon">M1917 MG (Лёгкий / Линза — по карте)</span></div>
+            <div><strong data-i18n="bf1_top_k">Больше всего убийств:</strong> <span id="bf1-weapon">M1909 Benét–Mercié Telescopic (405 kills)</span></div>
           </div>
         </div>
       </section>
 
-      <!-- 4. Мои творения -->
+      <!-- 4. Творения -->
       <section id="projects" class="section">
         <div class="section-header">
-          <span class="sec-num">04 //</span>
-          <h2 class="section-title" data-i18n="sec_projects">МОИ ТВОРЕНИЯ</h2>
+          <h2 class="section-title" data-i18n="sec_projects">Мои творения</h2>
         </div>
 
-        <div class="archive-showcase">
-          <div class="archive-main">
-            <div class="archive-meta">
-              <span class="card-id">[PKG] GITHUB // REPO</span>
-              <span class="tech-pill">C# / PPG</span>
+        <div class="card project-card">
+          <div class="project-main">
+            <div class="project-meta">
+              <span class="tag">People Playground</span>
+              <span class="tag">C#</span>
             </div>
             <h3>Lite Pixel Blood</h3>
             <p data-i18n="proj_lpb_desc">Мод для People Playground с оптимизированной пиксельной кровью и гибкими настройками. Более 15 000 подписчиков в мастерской.</p>
-            <a href="https://github.com/Gander18/Lite-Pixel-Blood" class="p5-btn" target="_blank" rel="noopener" data-i18n="proj_lpb_btn">GITHUB РЕПОЗИТОРИЙ ↗</a>
+            <a href="https://github.com/Gander18/Lite-Pixel-Blood" class="p5-choice-btn" target="_blank" rel="noopener" data-i18n="proj_lpb_btn">GitHub Репозиторий</a>
           </div>
 
-          <div class="archive-metric">
-            <span class="metric-number">15K+</span>
-            <span class="metric-label" data-i18n="proj_subs_label">ПОДПИСЧИКОВ</span>
-            <span class="metric-sub">30,000+ VIEWS</span>
+          <div class="project-side">
+            <div class="metric-big">15K+</div>
+            <div class="metric-caption" data-i18n="proj_subs_label">подписчиков</div>
+            <div class="metric-note">30 000+ просмотров</div>
           </div>
         </div>
       </section>
 
-      <!-- 5. Планы на будущее -->
+      <!-- 5. Планы -->
       <section id="plans" class="section">
         <div class="section-header">
-          <span class="sec-num">05 //</span>
-          <h2 class="section-title" data-i18n="sec_plans">ПЛАНЫ НА БУДУЩЕЕ</h2>
+          <h2 class="section-title" data-i18n="sec_plans">Планы</h2>
         </div>
 
-        <div class="timeline">
-          <div class="timeline-item active">
-            <div class="tl-marker">[01]</div>
-            <div class="tl-body">
-              <div class="tl-top">
-                <span class="rm-status">INFILTRATING</span>
-                <h3>Lite Pixel Blood Reforged</h3>
-              </div>
-              <p data-i18n="plan_1_desc">Полный перенос оригинального LPB на язык Lua.</p>
+        <div class="plans-list">
+          <article class="card plan-item">
+            <div class="plan-head">
+              <span class="plan-tag" data-i18n="status_active">В работе</span>
+              <h3>Lite Pixel Blood Reforged</h3>
             </div>
-          </div>
+            <p data-i18n="plan_1_desc">Полный перенос оригинального LPB на язык Lua.</p>
+          </article>
 
-          <div class="timeline-item">
-            <div class="tl-marker">[02]</div>
-            <div class="tl-body">
-              <div class="tl-top">
-                <span class="rm-status">TARGET LOCKED</span>
-                <h3>Lite Blood: Evoker (Mona's Version)</h3>
-              </div>
-              <p data-i18n="plan_2_desc">Замена стандартной физики крови в People Playground на визуальную модель: артериальные фонтаны с затуханием, текстурные подтёки по конечностям и слияние луж с 0% нагрузки на PhysX.</p>
+          <article class="card plan-item">
+            <div class="plan-head">
+              <span class="plan-tag muted" data-i18n="status_planned">В планах</span>
+              <h3>Lite Blood: Evoker (Mona's Version)</h3>
             </div>
-          </div>
+            <p data-i18n="plan_2_desc">Визуальная модель крови вместо стандартной физики: фонтаны с затуханием, следы по конечностям и слияние луж без лишней нагрузки на PhysX.</p>
+          </article>
 
-          <div class="timeline-item">
-            <div class="tl-marker">[03]</div>
-            <div class="tl-body">
-              <div class="tl-top">
-                <span class="rm-status">CONCEPT</span>
-                <h3 data-i18n="plan_3_title">Переосмысление жидкостей в PPG (название в разработке)</h3>
-              </div>
-              <p data-i18n="plan_3_desc">Глобальная переработка поведения и физики жидкостей в People Playground.</p>
+          <article class="card plan-item">
+            <div class="plan-head">
+              <span class="plan-tag muted" data-i18n="status_idea">Идея</span>
+              <h3 data-i18n="plan_3_title">Переработка жидкостей в PPG</h3>
             </div>
-          </div>
+            <p data-i18n="plan_3_desc">Обновление поведения и физики жидкостей в People Playground (название ещё в разработке).</p>
+          </article>
 
-          <div class="timeline-item active">
-            <div class="tl-marker">[04]</div>
-            <div class="tl-body">
-              <div class="tl-top">
-                <span class="rm-status">INFILTRATING</span>
-                <h3 data-i18n="plan_4_title">Развитие этого терминала</h3>
-              </div>
-              <p data-i18n="plan_4_desc">Докрутить интерфейс, подключить рабочие ссылки на проекты и расширить функционал.</p>
+          <article class="card plan-item">
+            <div class="plan-head">
+              <span class="plan-tag" data-i18n="status_active">В работе</span>
+              <h3 data-i18n="plan_4_title">Развитие этого сайта</h3>
             </div>
-          </div>
+            <p data-i18n="plan_4_desc">Дорабатывать интерфейс, добавлять ссылки на проекты и улучшать разделы.</p>
+          </article>
         </div>
       </section>
 
-      <!-- 6. Мои контакты -->
+      <!-- 6. Контакты -->
       <section id="contacts" class="section">
         <div class="section-header">
-          <span class="sec-num">06 //</span>
-          <h2 class="section-title" data-i18n="sec_contacts">КАНАЛЫ СВЯЗИ</h2>
+          <h2 class="section-title" data-i18n="sec_contacts">Контакты</h2>
         </div>
-        <p class="section-desc" data-i18n="contacts_desc">&gt; Выбери узел для прямого подключения или скопируй тег в буфер обмена:</p>
+        <p class="section-desc" data-i18n="contacts_desc">Открой профиль или скопируй ник в буфер обмена:</p>
 
         <div class="contacts-grid">
-          <a href="https://steamcommunity.com/id/67676767AAAAAAAAAAAAAAA/" class="p5-contact" target="_blank" rel="noopener">
-            <span class="c-glyph" aria-hidden="true">[ST]</span>
-            <div>
-              <span class="c-label">STEAM</span>
-              <span class="c-val">Gander18 ↗</span>
-            </div>
+          <a href="https://steamcommunity.com/id/67676767AAAAAAAAAAAAAAA/" class="contact-card" target="_blank" rel="noopener">
+            <span class="contact-type">Steam</span>
+            <strong class="contact-val">Gander18</strong>
           </a>
 
-          <a href="https://www.youtube.com/@Gander18" class="p5-contact" target="_blank" rel="noopener">
-            <span class="c-glyph" aria-hidden="true">▶YT</span>
-            <div>
-              <span class="c-label">YOUTUBE</span>
-              <span class="c-val">@Gander18 ↗</span>
-            </div>
+          <a href="https://www.youtube.com/@Gander18" class="contact-card" target="_blank" rel="noopener">
+            <span class="contact-type">YouTube</span>
+            <strong class="contact-val">@Gander18</strong>
           </a>
 
-          <a href="https://www.reddit.com/user/Primagander228/" class="p5-contact" target="_blank" rel="noopener">
-            <span class="c-glyph" aria-hidden="true">r//</span>
-            <div>
-              <span class="c-label">REDDIT</span>
-              <span class="c-val">u/Primagander228 ↗</span>
-            </div>
+          <a href="https://www.reddit.com/user/Primagander228/" class="contact-card" target="_blank" rel="noopener">
+            <span class="contact-type">Reddit</span>
+            <strong class="contact-val">u/Primagander228</strong>
           </a>
 
-          <button type="button" class="p5-contact copy-btn" data-copy="primagander">
-            <span class="c-glyph" aria-hidden="true">#DC</span>
-            <div>
-              <span class="c-label">DISCORD [COPY]</span>
-              <span class="c-val">primagander</span>
-            </div>
+          <button type="button" class="contact-card copy-btn" data-copy="primagander">
+            <span class="contact-type" data-i18n="copy_discord">Discord · Копировать</span>
+            <strong class="contact-val">primagander</strong>
           </button>
 
-          <button type="button" class="p5-contact copy-btn" data-copy="PrimaGander18">
-            <span class="c-glyph" aria-hidden="true">/EG/</span>
-            <div>
-              <span class="c-label">EPIC GAMES [COPY]</span>
-              <span class="c-val">PrimaGander18</span>
-            </div>
+          <button type="button" class="contact-card copy-btn" data-copy="PrimaGander18">
+            <span class="contact-type" data-i18n="copy_epic">Epic Games · Копировать</span>
+            <strong class="contact-val">PrimaGander18</strong>
           </button>
 
-          <a href="mailto:ganderrich18@gmail.com" class="p5-contact">
-            <span class="c-glyph" aria-hidden="true">@@</span>
-            <div>
-              <span class="c-label">E-MAIL</span>
-              <span class="c-val">ganderrich18@gmail.com</span>
-            </div>
+          <a href="mailto:ganderrich18@gmail.com" class="contact-card">
+            <span class="contact-type">E-mail</span>
+            <strong class="contact-val">ganderrich18@gmail.com</strong>
           </a>
         </div>
       </section>
@@ -387,11 +279,11 @@
 
   <footer class="footer">
     <div class="container footer-inner">
-      <span data-i18n="footer_note">ЛИЧНЫЙ ТЕРМИНАЛ // GANDER18</span>
-      <span class="footer-code">SYS_ID: ガンダXVIII</span>
+      <span>Gander18 · 2026</span>
+      <span>ガンダXVIII</span>
     </div>
   </footer>
 
-  <script src="script.js?v=11"></script>
+  <script src="script.js?v=22"></script>
 </body>
 </html>
