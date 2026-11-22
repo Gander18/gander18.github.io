@@ -1,4 +1,5 @@
 const SPOTIFY_URL = 'https://open.spotify.com/playlist/6IWrQPPMRPdiVHdEldgzyk?si=895dd11543534ada';
+const SPOTIFY_EMBED_URL = 'https://open.spotify.com/embed/playlist/6IWrQPPMRPdiVHdEldgzyk?utm_source=generator&theme=0';
 const LPB_REPO_URL = 'https://github.com/Gander18/Lite-Pixel-Blood';
 
 const translations = {
@@ -23,6 +24,8 @@ const translations = {
     skill_2_desc: 'Настраиваю систему, делаю конфиги, патчи и фиксы для игр, чтобы всё работало плавно даже на слабом железе.',
     skill_3_title: 'Игры и музыка',
     skill_3_desc: 'Зависаю в Battlefield 1 и Fortnite. Слушаю тяжёлый метал, альтернативу и саундтреки из японских игр.',
+    bgm_preview_btn: 'Плеер',
+    bgm_preview_hide: 'Скрыть',
     bgm_btn: 'Spotify Playlist',
     sec_bf1: 'Battlefield 1',
     stat_kills: 'Убийства',
@@ -79,6 +82,8 @@ const translations = {
     skill_2_desc: 'Tuning system settings, configs, patches, and fixes so games run smooth even on lower-end hardware.',
     skill_3_title: 'Games & Music',
     skill_3_desc: 'Playing Battlefield 1 and Fortnite. Listening to heavy metal, alternative rock, and Japanese game OSTs.',
+    bgm_preview_btn: 'Player',
+    bgm_preview_hide: 'Hide',
     bgm_btn: 'Spotify Playlist',
     sec_bf1: 'Battlefield 1',
     stat_kills: 'Kills',
@@ -138,6 +143,12 @@ function applyLanguage(lang) {
       el.innerHTML = nextHtml;
     }
   }
+
+  const playerToggle = document.getElementById('spotify-player-toggle');
+  const playerBox = document.getElementById('spotify-player-box');
+  if (playerToggle && playerBox) {
+    playerToggle.textContent = playerBox.hidden ? dict.bgm_preview_btn : dict.bgm_preview_hide;
+  }
 }
 
 const langToggleBtn = document.getElementById('lang-toggle');
@@ -146,6 +157,23 @@ if (langToggleBtn) {
     const nextLang = currentLang === 'ru' ? 'en' : 'ru';
     applyLanguage(nextLang);
     loadBF1Stats();
+  });
+}
+
+const spotifyToggleBtn = document.getElementById('spotify-player-toggle');
+const spotifyPlayerBox = document.getElementById('spotify-player-box');
+const spotifyEmbedFrame = document.getElementById('spotify-embed-frame');
+
+if (spotifyToggleBtn && spotifyPlayerBox && spotifyEmbedFrame) {
+  spotifyToggleBtn.addEventListener('click', () => {
+    const dict = translations[currentLang];
+    const willOpen = spotifyPlayerBox.hidden;
+    spotifyPlayerBox.hidden = !willOpen;
+    spotifyToggleBtn.textContent = willOpen ? dict.bgm_preview_hide : dict.bgm_preview_btn;
+
+    if (willOpen && !spotifyEmbedFrame.getAttribute('src')) {
+      spotifyEmbedFrame.setAttribute('src', SPOTIFY_EMBED_URL);
+    }
   });
 }
 

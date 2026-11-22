@@ -18,7 +18,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://gander18.github.io/og-preview.jpg">
 
-  <link rel="stylesheet" href="style.css?v=24">
+  <link rel="stylesheet" href="style.css?v=29">
 </head>
 <body>
 
@@ -113,7 +113,23 @@
               <h3 data-i18n="skill_3_title">Игры и музыка</h3>
               <p data-i18n="skill_3_desc">Зависаю в Battlefield 1 и Fortnite. Слушаю тяжёлый метал, альтернативу и саундтреки из японских игр.</p>
             </div>
-            <a href="https://open.spotify.com/playlist/6IWrQPPMRPdiVHdEldgzyk?si=895dd11543534ada" class="p5-choice-btn" target="_blank" rel="noopener" data-i18n="bgm_btn">Spotify Playlist</a>
+
+            <div class="bgm-actions">
+              <button type="button" id="spotify-player-toggle" class="p5-choice-btn" data-i18n="bgm_preview_btn">Плеер</button>
+              <a href="https://open.spotify.com/playlist/6IWrQPPMRPdiVHdEldgzyk?si=895dd11543534ada" class="p5-choice-btn" target="_blank" rel="noopener" data-i18n="bgm_btn">Spotify Playlist</a>
+            </div>
+
+            <div id="spotify-player-box" class="spotify-embed-box" hidden>
+              <iframe
+                id="spotify-embed-frame"
+                title="Spotify Playlist"
+                width="100%"
+                height="152"
+                style="border-radius: 8px; border: 0;"
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy">
+              </iframe>
+            </div>
           </article>
         </div>
       </section>
@@ -186,6 +202,14 @@
           </div>
 
           <div class="project-side">
+            <div class="project-media-wrap">
+              <img
+                src="lpb-demo.gif"
+                alt="Lite Pixel Blood demo"
+                class="project-demo-gif"
+                loading="lazy"
+                onerror="this.closest('.project-media-wrap').style.display='none';">
+            </div>
             <div class="metric-big">15K+</div>
             <div class="metric-caption" data-i18n="proj_subs_label">подписчиков</div>
             <div class="metric-note">30 000+ просмотров</div>
@@ -284,6 +308,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=24"></script>
+  <script src="script.js?v=29"></script>
 </body>
 </html>

@@ -469,6 +469,16 @@ button:focus-visible {
   gap: 14px;
 }
 
+.bgm-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.spotify-embed-box {
+  margin-top: 2px;
+}
+
 /* 3. Battlefield 1 */
 .bf1-card {
   background: linear-gradient(145deg, rgba(54, 25, 14, 0.84) 0%, rgba(16, 25, 36, 0.9) 60%, rgba(12, 17, 24, 0.94) 100%);
@@ -551,7 +561,7 @@ button:focus-visible {
 /* 4. Творения */
 .project-card {
   display: grid;
-  grid-template-columns: 1.6fr 0.75fr;
+  grid-template-columns: 1.45fr 0.95fr;
   padding: 0;
   overflow: hidden;
 }
@@ -583,12 +593,29 @@ button:focus-visible {
 .project-side {
   background: linear-gradient(150deg, rgba(255, 106, 26, 0.28) 0%, rgba(28, 42, 58, 0.85) 100%);
   border-left: 2px solid var(--cp-yellow);
-  padding: 20px;
+  padding: 16px 18px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
+  gap: 4px;
+}
+
+.project-media-wrap {
+  width: 100%;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background-color: rgba(9, 11, 15, 0.75);
+}
+
+.project-demo-gif {
+  display: block;
+  width: 100%;
+  max-height: 150px;
+  object-fit: cover;
 }
 
 .metric-big {
@@ -602,13 +629,13 @@ button:focus-visible {
 .metric-caption {
   font-size: 0.88rem;
   font-weight: 800;
-  margin-top: 4px;
+  margin-top: 2px;
 }
 
 .metric-note {
   font-size: 0.76rem;
   color: var(--muted);
-  margin-top: 6px;
+  margin-top: 2px;
 }
 
 /* 5. Планы */
