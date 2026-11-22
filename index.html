@@ -18,7 +18,8 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://gander18.github.io/og-preview.jpg">
 
-  <link rel="stylesheet" href="style.css?v=29">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;700;800&display=swap">
+  <link rel="stylesheet" href="style.css?v=31">
 </head>
 <body>
 
@@ -39,6 +40,7 @@
           <a href="#bf1" data-i18n="nav_bf1">Battlefield 1</a>
           <a href="#projects" data-i18n="nav_projects">Творения</a>
           <a href="#plans" data-i18n="nav_plans">Планы</a>
+          <a href="#music" data-i18n="nav_music">Музыка</a>
           <a href="#contacts" data-i18n="nav_contacts">Контакты</a>
         </nav>
         <button type="button" id="lang-toggle" class="lang-btn" title="Switch language">RU / EN</button>
@@ -58,7 +60,7 @@
             <span class="name-plate">GANDER18</span>
           </h1>
           <p class="lead" data-i18n="hero_lead">
-            Делаю моды для игр, ковыряюсь в железе и софте, пишу код на C#, C++ и Lua, иногда моделю в Blender. Выжимаю максимум FPS из скромного железа и перекраиваю системы под себя.
+            Делаю моды для игр, ковыряюсь в железе и софте, пишу на C#, C++ и Lua, иногда моделю в Blender. Выжимаю максимум FPS из скромного железа и перекраиваю системы под себя.
           </p>
 
           <div class="aka-block">
@@ -113,23 +115,7 @@
               <h3 data-i18n="skill_3_title">Игры и музыка</h3>
               <p data-i18n="skill_3_desc">Зависаю в Battlefield 1 и Fortnite. Слушаю тяжёлый метал, альтернативу и саундтреки из японских игр.</p>
             </div>
-
-            <div class="bgm-actions">
-              <button type="button" id="spotify-player-toggle" class="p5-choice-btn" data-i18n="bgm_preview_btn">Плеер</button>
-              <a href="https://open.spotify.com/playlist/6IWrQPPMRPdiVHdEldgzyk?si=895dd11543534ada" class="p5-choice-btn" target="_blank" rel="noopener" data-i18n="bgm_btn">Spotify Playlist</a>
-            </div>
-
-            <div id="spotify-player-box" class="spotify-embed-box" hidden>
-              <iframe
-                id="spotify-embed-frame"
-                title="Spotify Playlist"
-                width="100%"
-                height="152"
-                style="border-radius: 8px; border: 0;"
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                loading="lazy">
-              </iframe>
-            </div>
+            <a href="#music" class="p5-choice-btn" data-i18n="bgm_jump_btn">К плееру</a>
           </article>
         </div>
       </section>
@@ -258,7 +244,36 @@
         </div>
       </section>
 
-      <!-- 6. Контакты -->
+      <!-- 6. Музыка / Плеер -->
+      <section id="music" class="section">
+        <div class="section-header">
+          <h2 class="section-title" data-i18n="sec_music">Музыка</h2>
+        </div>
+
+        <div class="card music-card">
+          <div class="music-top">
+            <div>
+              <h3 data-i18n="music_card_title">Плейлист Spotify</h3>
+              <p class="section-desc" data-i18n="music_card_desc">Тяжёлый метал, альтернатива и саундтреки из японских игр.</p>
+            </div>
+            <a href="https://open.spotify.com/playlist/6IWrQPPMRPdiVHdEldgzyk?si=895dd11543534ada" class="p5-choice-btn" target="_blank" rel="noopener" data-i18n="bgm_btn">Открыть в Spotify</a>
+          </div>
+
+          <div class="spotify-player-frame-wrap">
+            <iframe
+              title="Spotify Playlist"
+              src="https://open.spotify.com/embed/playlist/6IWrQPPMRPdiVHdEldgzyk?utm_source=generator&theme=0"
+              width="100%"
+              height="352"
+              style="border-radius: 10px; border: 0;"
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy">
+            </iframe>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. Контакты -->
       <section id="contacts" class="section">
         <div class="section-header">
           <h2 class="section-title" data-i18n="sec_contacts">Контакты</h2>
@@ -308,6 +323,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=29"></script>
+  <script src="script.js?v=31"></script>
 </body>
 </html>

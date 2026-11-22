@@ -50,7 +50,7 @@ body {
     radial-gradient(ellipse 110% 55% at 50% 95%, rgba(12, 15, 20, 0.96), rgba(26, 33, 44, 0.45) 55%, transparent 82%),
     linear-gradient(165deg, #28140b 0%, #141b26 52%, #080a0e 100%);
   color: var(--text);
-  font-family: 'Century Gothic', 'JetBrains Mono', sans-serif;
+  font-family: 'Inter', 'Century Gothic', 'JetBrains Mono', sans-serif;
   line-height: 1.6;
   min-height: 100vh;
   overflow-x: hidden;
@@ -469,16 +469,6 @@ button:focus-visible {
   gap: 14px;
 }
 
-.bgm-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.spotify-embed-box {
-  margin-top: 2px;
-}
-
 /* 3. Battlefield 1 */
 .bf1-card {
   background: linear-gradient(145deg, rgba(54, 25, 14, 0.84) 0%, rgba(16, 25, 36, 0.9) 60%, rgba(12, 17, 24, 0.94) 100%);
@@ -674,7 +664,40 @@ button:focus-visible {
   border-color: rgba(118, 165, 204, 0.35);
 }
 
-/* 6. Контакты */
+/* 6. Музыка */
+.music-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.music-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.music-top h3 {
+  font-size: 1.12rem;
+  font-weight: 800;
+  margin-bottom: 4px;
+}
+
+.music-top .section-desc {
+  margin-bottom: 0;
+}
+
+.spotify-player-frame-wrap {
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background-color: rgba(9, 11, 15, 0.8);
+}
+
+/* 7. Контакты */
 .contacts-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

@@ -1,6 +1,7 @@
 const SPOTIFY_URL = 'https://open.spotify.com/playlist/6IWrQPPMRPdiVHdEldgzyk?si=895dd11543534ada';
-const SPOTIFY_EMBED_URL = 'https://open.spotify.com/embed/playlist/6IWrQPPMRPdiVHdEldgzyk?utm_source=generator&theme=0';
 const LPB_REPO_URL = 'https://github.com/Gander18/Lite-Pixel-Blood';
+const BF1_CACHE_KEY = 'gander18_bf1_stats_v1';
+const LANG_COOKIE_NAME = 'gander18_lang';
 
 const translations = {
   ru: {
@@ -9,9 +10,10 @@ const translations = {
     nav_bf1: 'Battlefield 1',
     nav_projects: 'Творения',
     nav_plans: 'Планы',
+    nav_music: 'Музыка',
     nav_contacts: 'Контакты',
     hero_greeting: 'Привет, я',
-    hero_lead: 'Делаю моды для игр, ковыряюсь в железе и софте, пишу код на C#, C++ и Lua, иногда моделю в Blender. Выжимаю максимум FPS из скромного железа и перекраиваю системы под себя.',
+    hero_lead: 'Делаю моды для игр, ковыряюсь в железе и софте, пишу на C#, C++ и Lua, иногда моделю в Blender. Выжимаю максимум FPS из скромного железа и перекраиваю системы под себя.',
     aka_label: 'Также известен как:',
     aka_more: 'и т.д.',
     rig_title: 'ПК и софт',
@@ -24,9 +26,7 @@ const translations = {
     skill_2_desc: 'Настраиваю систему, делаю конфиги, патчи и фиксы для игр, чтобы всё работало плавно даже на слабом железе.',
     skill_3_title: 'Игры и музыка',
     skill_3_desc: 'Зависаю в Battlefield 1 и Fortnite. Слушаю тяжёлый метал, альтернативу и саундтреки из японских игр.',
-    bgm_preview_btn: 'Плеер',
-    bgm_preview_hide: 'Скрыть',
-    bgm_btn: 'Spotify Playlist',
+    bgm_jump_btn: 'К плееру',
     sec_bf1: 'Battlefield 1',
     stat_kills: 'Убийства',
     stat_win: 'Победы',
@@ -50,6 +50,10 @@ const translations = {
     plan_3_desc: 'Обновление поведения и физики жидкостей в People Playground (название ещё в разработке).',
     plan_4_title: 'Первая анимация в Unreal Engine',
     plan_4_desc: 'Собрать сцену и сделать первую анимацию в Unreal Engine.',
+    sec_music: 'Музыка',
+    music_card_title: 'Плейлист Spotify',
+    music_card_desc: 'Тяжёлый метал, альтернатива и саундтреки из японских игр.',
+    bgm_btn: 'Открыть в Spotify',
     sec_contacts: 'Контакты',
     contacts_desc: 'Открой профиль или скопируй ник в буфер обмена:',
     copy_discord: 'Discord · Копировать',
@@ -67,6 +71,7 @@ const translations = {
     nav_bf1: 'Battlefield 1',
     nav_projects: 'Projects',
     nav_plans: 'Plans',
+    nav_music: 'Music',
     nav_contacts: 'Contacts',
     hero_greeting: 'Hi, I am',
     hero_lead: 'Making game mods, tweaking hardware and software, coding in C#, C++ and Lua, occasionally modeling in Blender. Squeezing max FPS out of modest hardware and tuning systems to fit me.',
@@ -82,9 +87,7 @@ const translations = {
     skill_2_desc: 'Tuning system settings, configs, patches, and fixes so games run smooth even on lower-end hardware.',
     skill_3_title: 'Games & Music',
     skill_3_desc: 'Playing Battlefield 1 and Fortnite. Listening to heavy metal, alternative rock, and Japanese game OSTs.',
-    bgm_preview_btn: 'Player',
-    bgm_preview_hide: 'Hide',
-    bgm_btn: 'Spotify Playlist',
+    bgm_jump_btn: 'Go to player',
     sec_bf1: 'Battlefield 1',
     stat_kills: 'Kills',
     stat_win: 'Win rate',
@@ -108,6 +111,10 @@ const translations = {
     plan_3_desc: 'Reworking liquid behavior and physics in People Playground (working title).',
     plan_4_title: 'First Animation in Unreal Engine',
     plan_4_desc: 'Set up a scene and make a first animation in Unreal Engine.',
+    sec_music: 'Music',
+    music_card_title: 'Spotify Playlist',
+    music_card_desc: 'Heavy metal, alternative rock, and Japanese game OSTs.',
+    bgm_btn: 'Open in Spotify',
     sec_contacts: 'Contacts',
     contacts_desc: 'Open a profile or copy a handle to clipboard:',
     copy_discord: 'Discord · Copy',
@@ -121,12 +128,42 @@ const translations = {
   }
 };
 
-let currentLang = localStorage.getItem('gander18_lang') || 'ru';
+function getCookie(name) {
+  const parts = document.cookie ? document.cookie.split('; ') : [];
+  for (let i = 0; i < parts.length; i++) {
+    const idx = parts[i].indexOf('=');
+    if (idx > 0 && parts[i].slice(0, idx) === name) {
+      return decodeURIComponent(parts[i].slice(idx + 1));
+    }
+  }
+  return null;
+}
+
+function setCookie(name, value, days) {
+  const maxAge = days * 24 * 60 * 60;
+  document.cookie = `${name}=${encodeURIComponent(value)}; max-age=${maxAge}; path=/; SameSite=Lax`;
+}
+
+function readInitialLang() {
+  const fromCookie = getCookie(LANG_COOKIE_NAME);
+  if (fromCookie === 'ru' || fromCookie === 'en') return fromCookie;
+  try {
+    const fromStorage = localStorage.getItem('gander18_lang');
+    if (fromStorage === 'ru' || fromStorage === 'en') return fromStorage;
+  } catch (_) {}
+  return 'ru';
+}
+
+let currentLang = readInitialLang();
+let latestBF1Data = null;
 const i18nElements = Array.from(document.querySelectorAll('[data-i18n]'));
 
 function applyLanguage(lang) {
   currentLang = lang;
-  localStorage.setItem('gander18_lang', lang);
+  setCookie(LANG_COOKIE_NAME, lang, 365);
+  try {
+    localStorage.setItem('gander18_lang', lang);
+  } catch (_) {}
   document.documentElement.lang = lang;
 
   const langBtn = document.getElementById('lang-toggle');
@@ -138,16 +175,10 @@ function applyLanguage(lang) {
   for (let i = 0; i < i18nElements.length; i++) {
     const el = i18nElements[i];
     const key = el.getAttribute('data-i18n');
-    const nextHtml = dict[key];
-    if (nextHtml !== undefined && el.innerHTML !== nextHtml) {
-      el.innerHTML = nextHtml;
+    const nextText = dict[key];
+    if (nextText !== undefined && el.textContent !== nextText) {
+      el.textContent = nextText;
     }
-  }
-
-  const playerToggle = document.getElementById('spotify-player-toggle');
-  const playerBox = document.getElementById('spotify-player-box');
-  if (playerToggle && playerBox) {
-    playerToggle.textContent = playerBox.hidden ? dict.bgm_preview_btn : dict.bgm_preview_hide;
   }
 }
 
@@ -156,23 +187,10 @@ if (langToggleBtn) {
   langToggleBtn.addEventListener('click', () => {
     const nextLang = currentLang === 'ru' ? 'en' : 'ru';
     applyLanguage(nextLang);
-    loadBF1Stats();
-  });
-}
-
-const spotifyToggleBtn = document.getElementById('spotify-player-toggle');
-const spotifyPlayerBox = document.getElementById('spotify-player-box');
-const spotifyEmbedFrame = document.getElementById('spotify-embed-frame');
-
-if (spotifyToggleBtn && spotifyPlayerBox && spotifyEmbedFrame) {
-  spotifyToggleBtn.addEventListener('click', () => {
-    const dict = translations[currentLang];
-    const willOpen = spotifyPlayerBox.hidden;
-    spotifyPlayerBox.hidden = !willOpen;
-    spotifyToggleBtn.textContent = willOpen ? dict.bgm_preview_hide : dict.bgm_preview_btn;
-
-    if (willOpen && !spotifyEmbedFrame.getAttribute('src')) {
-      spotifyEmbedFrame.setAttribute('src', SPOTIFY_EMBED_URL);
+    if (latestBF1Data) {
+      renderBF1Data(latestBF1Data, translations[currentLang].bf1_live, 'live');
+    } else {
+      loadBF1Stats();
     }
   });
 }
@@ -230,6 +248,7 @@ document.querySelectorAll('.copy-btn').forEach(btn => {
 });
 
 function renderBF1Data(data, statusLabel, state) {
+  latestBF1Data = data;
   const locale = currentLang === 'ru' ? 'ru-RU' : 'en-US';
 
   if (data.rank !== undefined) {
@@ -294,13 +313,11 @@ function renderBF1Unavailable() {
 
 async function loadBF1Stats() {
   const dict = translations[currentLang];
-  const apiLang = currentLang === 'ru' ? 'ru-ru' : 'en-us';
-  const cacheKey = `gander18_bf1_${apiLang}`;
   const CACHE_TTL = 15 * 60 * 1000;
   const FETCH_TIMEOUT = 5000;
 
   try {
-    const cachedRaw = localStorage.getItem(cacheKey);
+    const cachedRaw = localStorage.getItem(BF1_CACHE_KEY);
     if (cachedRaw) {
       const cached = JSON.parse(cachedRaw);
       if (cached && cached.data && typeof cached.timestamp === 'number') {
@@ -308,18 +325,18 @@ async function loadBF1Stats() {
           renderBF1Data(cached.data, dict.bf1_live, 'live');
           return;
         }
-        localStorage.removeItem(cacheKey);
+        localStorage.removeItem(BF1_CACHE_KEY);
       } else {
-        localStorage.removeItem(cacheKey);
+        localStorage.removeItem(BF1_CACHE_KEY);
       }
     }
   } catch (e) {
-    try { localStorage.removeItem(cacheKey); } catch (_) {}
+    try { localStorage.removeItem(BF1_CACHE_KEY); } catch (_) {}
   }
 
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), FETCH_TIMEOUT);
-  const apiUrl = `https://api.gametools.network/bf1/stats/?name=PrimaGander18&platform=pc&lang=${apiLang}`;
+  const apiUrl = 'https://api.gametools.network/bf1/stats/?name=PrimaGander18&platform=pc&lang=en-us';
 
   try {
     const response = await fetch(apiUrl, { signal: controller.signal });
@@ -328,7 +345,7 @@ async function loadBF1Stats() {
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const data = await response.json();
 
-    localStorage.setItem(cacheKey, JSON.stringify({
+    localStorage.setItem(BF1_CACHE_KEY, JSON.stringify({
       timestamp: Date.now(),
       data: data
     }));
