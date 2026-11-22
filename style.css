@@ -551,7 +551,7 @@ button:focus-visible {
 /* 4. Творения */
 .project-card {
   display: grid;
-  grid-template-columns: 1.45fr 0.95fr;
+  grid-template-columns: 1.65fr 0.65fr;
   padding: 0;
   overflow: hidden;
 }
@@ -561,7 +561,7 @@ button:focus-visible {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 10px;
+  gap: 12px;
 }
 
 .project-meta {
@@ -580,32 +580,65 @@ button:focus-visible {
   padding: 2px 8px;
 }
 
+.lpb-versions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ver-tab {
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 800;
+  font-style: italic;
+  text-transform: uppercase;
+  color: var(--text);
+  background-color: rgba(15, 17, 23, 0.9);
+  border: 1px solid var(--border);
+  padding: 5px 12px;
+  cursor: pointer;
+  transform: skewX(-12deg);
+  transition: background-color 0.14s, color 0.14s, border-color 0.14s;
+}
+
+.ver-tab:hover {
+  border-color: var(--cp-cyan);
+}
+
+.ver-tab.active {
+  background-color: var(--cp-yellow);
+  color: #090a0d;
+  border-color: var(--text);
+  box-shadow: 2px 2px 0 var(--p5-red);
+}
+
+.project-video-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background-color: #080a0e;
+}
+
+.project-video-wrap iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
 .project-side {
   background: linear-gradient(150deg, rgba(255, 106, 26, 0.28) 0%, rgba(28, 42, 58, 0.85) 100%);
   border-left: 2px solid var(--cp-yellow);
-  padding: 16px 18px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  gap: 4px;
-}
-
-.project-media-wrap {
-  width: 100%;
-  margin-bottom: 8px;
-  border-radius: 6px;
-  overflow: hidden;
-  border: 1px solid var(--border);
-  background-color: rgba(9, 11, 15, 0.75);
-}
-
-.project-demo-gif {
-  display: block;
-  width: 100%;
-  max-height: 150px;
-  object-fit: cover;
 }
 
 .metric-big {
@@ -619,13 +652,13 @@ button:focus-visible {
 .metric-caption {
   font-size: 0.88rem;
   font-weight: 800;
-  margin-top: 2px;
+  margin-top: 4px;
 }
 
 .metric-note {
   font-size: 0.76rem;
   color: var(--muted);
-  margin-top: 2px;
+  margin-top: 6px;
 }
 
 /* 5. Планы */
@@ -662,6 +695,92 @@ button:focus-visible {
   color: var(--text);
   background-color: rgba(76, 114, 148, 0.35);
   border-color: rgba(118, 165, 204, 0.35);
+}
+
+/* 5b. Игры и 100% комплиты */
+.games-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.games-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(118, 165, 204, 0.22);
+}
+
+.games-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.game-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(180deg, rgba(22, 29, 39, 0.82) 0%, rgba(11, 14, 20, 0.92) 100%);
+  border: 1px solid rgba(118, 165, 204, 0.22);
+  border-left: 3px solid var(--cp-cyan);
+  border-radius: 6px;
+  padding: 12px 14px;
+}
+
+.game-item.is-100 {
+  border-left-color: var(--cp-yellow);
+}
+
+.game-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.game-title {
+  font-size: 0.94rem;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.game-meta {
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.game-badge {
+  flex-shrink: 0;
+  font-size: 0.74rem;
+  font-weight: 800;
+  font-style: italic;
+  padding: 2px 8px;
+  transform: skewX(-12deg);
+  border: 1px solid var(--border);
+  color: var(--cp-cyan);
+  background-color: rgba(12, 16, 22, 0.85);
+}
+
+.game-badge.badge-100 {
+  color: #090a0d;
+  background-color: var(--cp-yellow);
+  border-color: var(--text);
+}
+
+.games-footer-actions {
+  display: flex;
+  justify-content: center;
+  padding-top: 4px;
 }
 
 /* 6. Музыка */
@@ -829,7 +948,8 @@ button:focus-visible {
 
   .grid-3,
   .project-card,
-  .plans-list {
+  .plans-list,
+  .games-grid {
     grid-template-columns: 1fr;
     gap: 10px;
   }

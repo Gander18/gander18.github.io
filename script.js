@@ -10,6 +10,7 @@ const translations = {
     nav_bf1: 'Battlefield 1',
     nav_projects: 'Творения',
     nav_plans: 'Планы',
+    nav_games: 'Игры 100%',
     nav_music: 'Музыка',
     nav_contacts: 'Контакты',
     hero_greeting: 'Привет, я',
@@ -38,6 +39,11 @@ const translations = {
     bf1_top_k: 'Больше всего убийств:',
     sec_projects: 'Мои творения',
     proj_lpb_desc: 'Мод для People Playground с оптимизированной пиксельной кровью и гибкими настройками. Более 15 000 подписчиков в мастерской.',
+    ver_4: 'Версия 4',
+    ver_3_1: 'Версия 3.1',
+    ver_2_1: 'Версия 2.1',
+    ver_1: 'Версия 1',
+    yt_watch_btn: 'Смотреть на YouTube ▶',
     proj_lpb_btn: 'GitHub Репозиторий',
     proj_subs_label: 'подписчиков',
     sec_plans: 'Планы',
@@ -50,6 +56,13 @@ const translations = {
     plan_3_desc: 'Обновление поведения и физики жидкостей в People Playground (название ещё в разработке).',
     plan_4_title: 'Первая анимация в Unreal Engine',
     plan_4_desc: 'Собрать сцену и сделать первую анимацию в Unreal Engine.',
+    sec_games: 'Игры · 100%',
+    filter_all: 'Все',
+    filter_100: '100% Ачивок',
+    filter_fav: 'Любимые',
+    steam_games_btn: 'Все игры в Steam',
+    games_expand: 'Развернуть список',
+    games_collapse: 'Свернуть список',
     sec_music: 'Музыка',
     music_card_title: 'Плейлист Spotify',
     music_card_desc: 'Тяжёлый метал, альтернатива и саундтреки из японских игр.',
@@ -71,6 +84,7 @@ const translations = {
     nav_bf1: 'Battlefield 1',
     nav_projects: 'Projects',
     nav_plans: 'Plans',
+    nav_games: 'Игры 100%',
     nav_music: 'Music',
     nav_contacts: 'Contacts',
     hero_greeting: 'Hi, I am',
@@ -99,6 +113,11 @@ const translations = {
     bf1_top_k: 'Top by kills:',
     sec_projects: 'My creations',
     proj_lpb_desc: 'People Playground mod with optimized pixel blood and flexible settings. Over 15,000 subscribers on the Steam Workshop.',
+    ver_4: 'Version 4',
+    ver_3_1: 'Version 3.1',
+    ver_2_1: 'Version 2.1',
+    ver_1: 'Version 1',
+    yt_watch_btn: 'Watch on YouTube ▶',
     proj_lpb_btn: 'GitHub Repository',
     proj_subs_label: 'subscribers',
     sec_plans: 'Plans',
@@ -111,6 +130,13 @@ const translations = {
     plan_3_desc: 'Reworking liquid behavior and physics in People Playground (working title).',
     plan_4_title: 'First Animation in Unreal Engine',
     plan_4_desc: 'Set up a scene and make a first animation in Unreal Engine.',
+    sec_games: 'Games · 100%',
+    filter_all: 'All',
+    filter_100: '100% Achievements',
+    filter_fav: 'Favorites',
+    steam_games_btn: 'All Steam Games',
+    games_expand: 'Expand list',
+    games_collapse: 'Collapse list',
     sec_music: 'Music',
     music_card_title: 'Spotify Playlist',
     music_card_desc: 'Heavy metal, alternative rock, and Japanese game OSTs.',
@@ -187,11 +213,196 @@ if (langToggleBtn) {
   langToggleBtn.addEventListener('click', () => {
     const nextLang = currentLang === 'ru' ? 'en' : 'ru';
     applyLanguage(nextLang);
+    renderGamesList();
     if (latestBF1Data) {
       renderBF1Data(latestBF1Data, translations[currentLang].bf1_live, 'live');
     } else {
       loadBF1Stats();
     }
+  });
+}
+
+const STEAM_GAMES_LIST = [
+  { title: 'People Playground', hours: '527.6 ч', hoursEn: '527.6h', is100: true, isFav: true, noteRu: '17/17 ачивок · Моддинг', noteEn: '17/17 achievements · Modding' },
+  { title: 'Hotline Miami 2: Wrong Number', hours: '53.7 ч', hoursEn: '53.7h', is100: true, isFav: true, noteRu: '29/29 ачивок', noteEn: '29/29 achievements' },
+  { title: 'Far Cry 3', hours: '45 ч', hoursEn: '45h', is100: true, isFav: true, noteRu: '44/44 ачивок', noteEn: '44/44 achievements' },
+  { title: 'Watch_Dogs 2', hours: '32.9 ч', hoursEn: '32.9h', is100: true, isFav: false, noteRu: '55/55 ачивок', noteEn: '55/55 achievements' },
+  { title: 'Portal 2', hours: '32.1 ч', hoursEn: '32.1h', is100: true, isFav: false, noteRu: '51/51 ачивок', noteEn: '51/51 achievements' },
+  { title: 'Everlasting Summer', hours: '14.4 ч', hoursEn: '14.4h', is100: true, isFav: false, noteRu: '14/14 ачивок', noteEn: '14/14 achievements' },
+  { title: 'Pixel Gun 3D: PC Edition', hours: '13.7 ч', hoursEn: '13.7h', is100: true, isFav: false, noteRu: '16/16 ачивок', noteEn: '16/16 achievements' },
+  { title: 'Hotline Miami', hours: '12.1 ч', hoursEn: '12.1h', is100: true, isFav: false, noteRu: '35/35 ачивок', noteEn: '35/35 achievements' },
+  { title: 'My Friend Pedro', hours: '8.7 ч', hoursEn: '8.7h', is100: true, isFav: false, noteRu: '30/30 ачивок', noteEn: '30/30 achievements' },
+  { title: 'BADLAND: Game of the Year Edition', hours: '8 ч', hoursEn: '8h', is100: true, isFav: false, noteRu: '78/78 ачивок', noteEn: '78/78 achievements' },
+  { title: 'CARRION', hours: '7.6 ч', hoursEn: '7.6h', is100: true, isFav: false, noteRu: '21/21 ачивок', noteEn: '21/21 achievements' },
+  { title: 'Deponia', hours: '7.6 ч', hoursEn: '7.6h', is100: true, isFav: false, noteRu: '19/19 ачивок', noteEn: '19/19 achievements' },
+  { title: 'Edna & Harvey: The Breakout - Anniversary Edition', hours: '7.4 ч', hoursEn: '7.4h', is100: true, isFav: false, noteRu: '18/18 ачивок', noteEn: '18/18 achievements' },
+  { title: 'QUICKERFLAK', hours: '6.6 ч', hoursEn: '6.6h', is100: true, isFav: false, noteRu: '9/9 ачивок', noteEn: '9/9 achievements' },
+  { title: 'Distant Space', hours: '5.2 ч', hoursEn: '5.2h', is100: true, isFav: false, noteRu: '44/44 ачивок', noteEn: '44/44 achievements' },
+  { title: 'Zup! XS', hours: '5.2 ч', hoursEn: '5.2h', is100: true, isFav: false, noteRu: '97/97 ачивок', noteEn: '97/97 achievements' },
+  { title: 'Trip to Vinelands', hours: '5.1 ч', hoursEn: '5.1h', is100: true, isFav: false, noteRu: '5/5 ачивок', noteEn: '5/5 achievements' },
+  { title: 'NEKOPARA Vol. 0', hours: '5 ч', hoursEn: '5h', is100: true, isFav: false, noteRu: '13/13 ачивок', noteEn: '13/13 achievements' },
+  { title: 'Zup! 8', hours: '5 ч', hoursEn: '5h', is100: true, isFav: false, noteRu: '2220/2220 ачивок', noteEn: '2220/2220 achievements' },
+  { title: 'TTV2', hours: '4.9 ч', hoursEn: '4.9h', is100: true, isFav: false, noteRu: '5/5 ачивок', noteEn: '5/5 achievements' },
+  { title: 'Zup! S', hours: '4.4 ч', hoursEn: '4.4h', is100: true, isFav: false, noteRu: '800/800 ачивок', noteEn: '800/800 achievements' },
+  { title: 'CHUCHEL', hours: '4.1 ч', hoursEn: '4.1h', is100: true, isFav: false, noteRu: '7/7 ачивок', noteEn: '7/7 achievements' },
+  { title: 'Mouse (Sneaking)', hours: '3.8 ч', hoursEn: '3.8h', is100: true, isFav: false, noteRu: '2975/2975 ачивок', noteEn: '2975/2975 achievements' },
+  { title: "DUSK '82", hours: '95 мин', hoursEn: '95m', is100: true, isFav: false, noteRu: '14/14 ачивок', noteEn: '14/14 achievements' },
+  { title: 'Helltaker', hours: '91 мин', hoursEn: '91m', is100: true, isFav: false, noteRu: '10/10 ачивок', noteEn: '10/10 achievements' },
+  { title: 'last seen online', hours: '41 мин', hoursEn: '41m', is100: true, isFav: false, noteRu: '11/11 ачивок', noteEn: '11/11 achievements' },
+  { title: 'RetroMaze', hours: '28 мин', hoursEn: '28m', is100: true, isFav: false, noteRu: '232/232 ачивок', noteEn: '232/232 achievements' },
+  { title: 'Run Zeus Run', hours: '13 мин', hoursEn: '13m', is100: true, isFav: false, noteRu: '170/170 ачивок', noteEn: '170/170 achievements' },
+  { title: 'ВЗЛОМ ЖОПЫ', hours: '4 мин', hoursEn: '4m', is100: true, isFav: false, noteRu: '20/20 ачивок', noteEn: '20/20 achievements' },
+  { title: 'Achievement Clicker 2019', hours: '—', hoursEn: '—', is100: true, isFav: false, noteRu: '5000/5000 ачивок', noteEn: '5000/5000 achievements' },
+  { title: 'Miss Neko 3', hours: '—', hoursEn: '—', is100: true, isFav: false, noteRu: '100/100 ачивок', noteEn: '100/100 achievements' },
+  { title: 'Pretty Neko', hours: '—', hoursEn: '—', is100: true, isFav: false, noteRu: '100/100 ачивок', noteEn: '100/100 achievements' },
+  { title: 'Zup! 2', hours: '—', hoursEn: '—', is100: true, isFav: false, noteRu: '229/229 ачивок', noteEn: '229/229 achievements' },
+  { title: 'PAYDAY 2', hours: '—', hoursEn: '—', is100: false, isFav: true, noteRu: 'Избранное', noteEn: 'Favorite' },
+  { title: 'Brotato', hours: '—', hoursEn: '—', is100: false, isFav: true, noteRu: 'Избранное', noteEn: 'Favorite' },
+  { title: 'Deus Ex: Human Revolution', hours: '—', hoursEn: '—', is100: false, isFav: true, noteRu: 'Избранное', noteEn: 'Favorite' },
+  { title: 'The Binding of Isaac: Repentance+', hours: '82.1 ч', hoursEn: '82.1h', is100: false, isFav: true, noteRu: 'Синергии и забеги', noteEn: 'Synergies & runs' },
+  { title: 'Battlefield 1', hours: '57 ч', hoursEn: '57h', is100: false, isFav: true, noteRu: 'Без HUD · Support', noteEn: 'No HUD · Support' }
+];
+
+const GAMES_COLLAPSED_LIMIT = 4;
+let currentGameFilter = 'all';
+let isGamesExpanded = false;
+
+function renderGamesList() {
+  const listEl = document.getElementById('games-list');
+  if (!listEl) return;
+
+  const dict = translations[currentLang];
+  const filtered = STEAM_GAMES_LIST.filter(g => {
+    if (currentGameFilter === '100') return g.is100;
+    if (currentGameFilter === 'fav') return g.isFav;
+    return true;
+  });
+
+  const expandBtn = document.getElementById('games-expand-btn');
+  const visible = isGamesExpanded ? filtered : filtered.slice(0, GAMES_COLLAPSED_LIMIT);
+
+  if (expandBtn) {
+    if (filtered.length <= GAMES_COLLAPSED_LIMIT) {
+      expandBtn.style.display = 'none';
+    } else {
+      expandBtn.style.display = 'inline-block';
+      expandBtn.textContent = isGamesExpanded ? dict.games_collapse : dict.games_expand;
+    }
+  }
+
+  listEl.innerHTML = '';
+  visible.forEach(g => {
+    const card = document.createElement('div');
+    card.className = g.is100 ? 'game-item is-100' : 'game-item';
+
+    const info = document.createElement('div');
+    info.className = 'game-info';
+
+    const title = document.createElement('span');
+    title.className = 'game-title';
+    title.textContent = g.title;
+
+    const meta = document.createElement('span');
+    meta.className = 'game-meta';
+    const note = currentLang === 'ru' ? g.noteRu : g.noteEn;
+    const hrs = currentLang === 'ru' ? g.hours : g.hoursEn;
+    meta.textContent = g.is100 ? note : `${hrs} · ${note}`;
+
+    info.appendChild(title);
+    info.appendChild(meta);
+
+    const badge = document.createElement('span');
+    badge.className = g.is100 ? 'game-badge badge-100' : 'game-badge';
+    badge.textContent = g.is100 ? '100%' : 'FAV';
+
+    card.appendChild(info);
+    card.appendChild(badge);
+    listEl.appendChild(card);
+  });
+}
+
+document.querySelectorAll('[data-game-filter]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    currentGameFilter = btn.getAttribute('data-game-filter') || 'all';
+    document.querySelectorAll('[data-game-filter]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderGamesList();
+  });
+});
+
+// Мемный звук при копировании: "Vine Boom + 8-bit coin" на Web Audio API (без внешних файлов)
+let sharedAudioCtx = null;
+
+function playMemeCopySound() {
+  try {
+    const AudioCtx = window.AudioContext || window.webkitAudioContext;
+    if (!AudioCtx) return;
+    if (!sharedAudioCtx) {
+      sharedAudioCtx = new AudioCtx();
+    }
+    if (sharedAudioCtx.state === 'suspended') {
+      sharedAudioCtx.resume();
+    }
+
+    const now = sharedAudioCtx.currentTime;
+
+    // 1. Низкий мемный "VINE BOOM" удар
+    const boomOsc = sharedAudioCtx.createOscillator();
+    const boomGain = sharedAudioCtx.createGain();
+    boomOsc.type = 'sine';
+    boomOsc.frequency.setValueAtTime(145, now);
+    boomOsc.frequency.exponentialRampToValueAtTime(34, now + 0.42);
+
+    boomGain.gain.setValueAtTime(0.45, now);
+    boomGain.gain.exponentialRampToValueAtTime(0.001, now + 0.45);
+
+    boomOsc.connect(boomGain);
+    boomGain.connect(sharedAudioCtx.destination);
+    boomOsc.start(now);
+    boomOsc.stop(now + 0.46);
+
+    // 2. Короткий 8-битный "дзынь" монетки поверх
+    const coinOsc = sharedAudioCtx.createOscillator();
+    const coinGain = sharedAudioCtx.createGain();
+    coinOsc.type = 'square';
+    coinOsc.frequency.setValueAtTime(987.77, now + 0.03);
+    coinOsc.frequency.setValueAtTime(1318.51, now + 0.1);
+
+    coinGain.gain.setValueAtTime(0.12, now + 0.03);
+    coinGain.gain.exponentialRampToValueAtTime(0.001, now + 0.28);
+
+    coinOsc.connect(coinGain);
+    coinGain.connect(sharedAudioCtx.destination);
+    coinOsc.start(now + 0.03);
+    coinOsc.stop(now + 0.29);
+  } catch (_) {}
+}
+
+const gamesExpandBtn = document.getElementById('games-expand-btn');
+if (gamesExpandBtn) {
+  gamesExpandBtn.addEventListener('click', () => {
+    isGamesExpanded = !isGamesExpanded;
+    renderGamesList();
+  });
+}
+
+const lpbFrame = document.getElementById('lpb-yt-frame');
+const verTabs = document.querySelectorAll('.ver-tab');
+
+if (lpbFrame && verTabs.length > 0) {
+  verTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const videoId = tab.getAttribute('data-yt');
+      if (!videoId) return;
+
+      verTabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      const nextSrc = `https://www.youtube.com/embed/${videoId}`;
+      if (lpbFrame.getAttribute('src') !== nextSrc) {
+        lpbFrame.setAttribute('src', nextSrc);
+      }
+    });
   });
 }
 
@@ -234,6 +445,7 @@ document.querySelectorAll('.copy-btn').forEach(btn => {
 
     copyToClipboard(textToCopy)
       .then(() => {
+        playMemeCopySound();
         valSpan.textContent = dict.copied_ok;
       })
       .catch(() => {
@@ -358,4 +570,5 @@ async function loadBF1Stats() {
 }
 
 applyLanguage(currentLang);
+renderGamesList();
 loadBF1Stats();

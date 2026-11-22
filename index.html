@@ -19,7 +19,7 @@
   <meta name="twitter:image" content="https://gander18.github.io/og-preview.jpg">
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;700;800&display=swap">
-  <link rel="stylesheet" href="style.css?v=31">
+  <link rel="stylesheet" href="style.css?v=38">
 </head>
 <body>
 
@@ -40,6 +40,7 @@
           <a href="#bf1" data-i18n="nav_bf1">Battlefield 1</a>
           <a href="#projects" data-i18n="nav_projects">Творения</a>
           <a href="#plans" data-i18n="nav_plans">Планы</a>
+          <a href="#games" data-i18n="nav_games">Игры 100%</a>
           <a href="#music" data-i18n="nav_music">Музыка</a>
           <a href="#contacts" data-i18n="nav_contacts">Контакты</a>
         </nav>
@@ -184,18 +185,29 @@
             </div>
             <h3>Lite Pixel Blood</h3>
             <p data-i18n="proj_lpb_desc">Мод для People Playground с оптимизированной пиксельной кровью и гибкими настройками. Более 15 000 подписчиков в мастерской.</p>
+
+            <div class="lpb-versions" role="tablist" aria-label="Версии Lite Pixel Blood">
+              <button type="button" class="ver-tab active" data-yt="91OeRkNtgeg" data-i18n="ver_4">Версия 4</button>
+              <button type="button" class="ver-tab" data-yt="4fC3JjK2gTQ" data-i18n="ver_3_1">Версия 3.1</button>
+              <button type="button" class="ver-tab" data-yt="g6rp8kb3Kqs" data-i18n="ver_2_1">Версия 2.1</button>
+              <button type="button" class="ver-tab" data-yt="2Tg75g9GP2A" data-i18n="ver_1">Версия 1</button>
+            </div>
+
+            <div class="project-video-wrap">
+              <iframe
+                id="lpb-yt-frame"
+                title="Lite Pixel Blood showcase"
+                src="https://www.youtube.com/embed/91OeRkNtgeg"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+              </iframe>
+            </div>
+
             <a href="https://github.com/Gander18/Lite-Pixel-Blood" class="p5-choice-btn" target="_blank" rel="noopener" data-i18n="proj_lpb_btn">GitHub Репозиторий</a>
           </div>
 
           <div class="project-side">
-            <div class="project-media-wrap">
-              <img
-                src="lpb-demo.gif"
-                alt="Lite Pixel Blood demo"
-                class="project-demo-gif"
-                loading="lazy"
-                onerror="this.closest('.project-media-wrap').style.display='none';">
-            </div>
             <div class="metric-big">15K+</div>
             <div class="metric-caption" data-i18n="proj_subs_label">подписчиков</div>
             <div class="metric-note">30 000+ просмотров</div>
@@ -241,6 +253,31 @@
             </div>
             <p data-i18n="plan_4_desc">Собрать сцену и сделать первую анимацию в Unreal Engine.</p>
           </article>
+        </div>
+      </section>
+
+      <!-- 5b. Игры и 100% комплиты -->
+      <section id="games" class="section">
+        <div class="section-header">
+          <h2 class="section-title" data-i18n="sec_games">Игры · 100%</h2>
+          <span class="sync-status" id="games-count">[100% ACHIEVEMENTS]</span>
+        </div>
+
+        <div class="card games-card">
+          <div class="games-top">
+            <div class="games-filters" role="tablist" aria-label="Фильтр игр">
+              <button type="button" class="ver-tab active" data-game-filter="all" data-i18n="filter_all">Все</button>
+              <button type="button" class="ver-tab" data-game-filter="100" data-i18n="filter_100">100% Ачивок</button>
+              <button type="button" class="ver-tab" data-game-filter="fav" data-i18n="filter_fav">Любимые</button>
+            </div>
+            <a href="https://steamcommunity.com/id/67676767AAAAAAAAAAAAAAA/games/?tab=all" class="p5-choice-btn" target="_blank" rel="noopener" data-i18n="steam_games_btn">Все игры в Steam</a>
+          </div>
+
+          <div id="games-list" class="games-grid"></div>
+
+          <div class="games-footer-actions">
+            <button type="button" id="games-expand-btn" class="p5-choice-btn" data-i18n="games_expand">Развернуть список</button>
+          </div>
         </div>
       </section>
 
@@ -323,6 +360,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=31"></script>
+  <script src="script.js?v=38"></script>
 </body>
 </html>
